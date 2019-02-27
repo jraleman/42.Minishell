@@ -37,6 +37,15 @@ int			sh_loop(char *argv[])
 
 // -----------------------------------------------------------------------------
 
+/*
+** Print usage message.
+*/
+
+static int	print_usage(char *bin)
+{
+	printf("usage: %s [option]\n", bin);
+	return ;
+}
 
 /*
 ** Main program function
@@ -51,5 +60,7 @@ int			main(int argc, char *argv[])
 		ret = sh_loop(NULL);
 	else if (argc == 2)
 		ret = sh_loop(argv[1]);
+	else if (argc > 2)
+		print_usage(argv[0]);
 	return (ret);
 }
