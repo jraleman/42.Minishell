@@ -11,26 +11,46 @@
 /* ************************************************************************** */
 
 // #include "minishell.h"
+#include <stdio.h>
+#include <stdlib.h>
+
+# define FT_STDIN		(0)
+# define EXIT_OK		(0)
+# define EXIT_FAIL		(1)
 
 /*
-** Shell looping function
+** Read user input.
 */
 
-int			sh_loop(char *argv[])
+static int	read_input(char **line)
+{
+	ssize_t	buffer;
+
+	buffer = 0;
+	getline(&line, &bufsize, FT_STDIN);
+	return (line && ret != -1 ? EXIT_OK : EXIT_FAIL);
+}
+
+/*
+** Shell looping function.
+*/
+
+int			sh_loop(void)
 {
 	int		ret;
 	int		loop;
-	char	*line;
+	char	**line;
 	char	**args;
 
-	ret = 0;
+	ret = EXIT_OK;
 	loop = 1;
 	while (loop)
 	{
 		printf("🍍 ");
-
+		if ((ret = read_input(&line)))
+			break ;
 		free(line);
-		free(args);
+		// free(args);
 	}
 	return (ret);
 }
@@ -55,9 +75,9 @@ int			main(int argc, char *argv[])
 {
 	int		ret;
 
-	ret = 0;
+	ret = EXIT_OK;
 	if (argc == 1)
-		ret = sh_loop(NULL);
+		ret = sh_loop();
 	else if (argc == 2)
 		ret = sh_loop(argv[1]);
 	else if (argc > 2)
