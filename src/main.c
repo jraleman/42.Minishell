@@ -22,12 +22,13 @@
 ** Read user input.
 */
 
-static int	read_input(char **line)
+static int	read_input(char *line)
 {
-	ssize_t	buffer;
+	int		ret;
+	size_t	buffer;
 
 	buffer = 0;
-	getline(&line, &bufsize, FT_STDIN);
+	ret = getline(&line, &buffer, FT_STDIN);
 	return (line && ret != -1 ? EXIT_OK : EXIT_FAIL);
 }
 
@@ -39,7 +40,7 @@ int			sh_loop(void)
 {
 	int		ret;
 	int		loop;
-	char	**line;
+	char	*line;
 	char	**args;
 
 	ret = EXIT_OK;
@@ -47,7 +48,7 @@ int			sh_loop(void)
 	while (loop)
 	{
 		printf("🍍 ");
-		if ((ret = read_input(&line)))
+		if ((ret = read_input(line)))
 			break ;
 		free(line);
 		// free(args);
@@ -61,7 +62,7 @@ int			sh_loop(void)
 ** Print usage message.
 */
 
-static int	print_usage(char *bin)
+static void	print_usage(char *bin)
 {
 	printf("usage: %s [option]\n", bin);
 	return ;
@@ -79,7 +80,7 @@ int			main(int argc, char *argv[])
 	if (argc == 1)
 		ret = sh_loop();
 	else if (argc == 2)
-		ret = sh_loop(argv[1]);
+		ret = sh_loop();
 	else if (argc > 2)
 		print_usage(argv[0]);
 	return (ret);
