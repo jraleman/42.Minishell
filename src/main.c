@@ -26,26 +26,15 @@
 ** Read user input.
 */
 
-// static int	read_input(char **line)
-// {
-// 	int		ret;
-// 	size_t	buffer;
-//
-// 	buffer = 8;
-// 	ret = 0;
-// 	// getline(line, &buffer, FT_STDIN);
-// 	ret = getline(line, &buffer, FT_STDIN);
-// 	return (line && ret != -1 ? EXIT_OK : EXIT_FAIL);
-// }
-
-char		*read_line(void)
+static int	read_input(char **line)
 {
-  char *line = NULL;
-  size_t bufsize = 0; // have getline allocate a buffer for us
-  getline(&line, &bufsize, stdin);
-  return line;
-}
+	int		ret;
+	size_t	buffer;
 
+	buffer = 8;
+	ret = getline(line, &buffer, stdin);
+	return (line && ret != -1 ? EXIT_OK : EXIT_FAIL);
+}
 
 /*
 ** Shell looping function.
@@ -64,9 +53,9 @@ int			sh_loop(void)
 	while (loop)
 	{
 		printf("🍍  > ");
-		// if ((ret = read_input(&line)))
-		// 	break ;
-		line = read_line();
+		if ((ret = read_input(&line)) == EXIT_FAIL)
+			break ;
+		// line = read_line();
 		free(line);
 		// free(args);
 	}
