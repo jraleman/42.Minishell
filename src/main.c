@@ -24,6 +24,7 @@
 # define ERR_MEM		(2)
 # define BUFF_SIZE		(64)
 # define TOK_DELIM		(" \t\r\n\a")
+# define CMD_PRMPT		("🍍  > ")
 
 /*
 ** Globals
@@ -107,9 +108,12 @@ int			sh_loop(void)
 	line = NULL;
 	while (loop)
 	{
-		printf("🍍  > ");
+		printf(CMD_PRMPT);
 		if ((ret = read_input(&line)) == EXIT_FAIL)
 			break ;
+		args = get_args(line);
+		// ... run_cmd(args);
+		free(args);
 		free(line);
 		line = NULL;
 	}
