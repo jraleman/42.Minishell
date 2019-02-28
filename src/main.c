@@ -14,6 +14,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/*
+** ...
+*/
+
 # define FT_STDIN		(0)
 # define EXIT_OK		(0)
 # define EXIT_FAIL		(1)
@@ -22,15 +26,26 @@
 ** Read user input.
 */
 
-static int	read_input(char *line)
-{
-	int		ret;
-	size_t	buffer;
+// static int	read_input(char **line)
+// {
+// 	int		ret;
+// 	size_t	buffer;
+//
+// 	buffer = 8;
+// 	ret = 0;
+// 	// getline(line, &buffer, FT_STDIN);
+// 	ret = getline(line, &buffer, FT_STDIN);
+// 	return (line && ret != -1 ? EXIT_OK : EXIT_FAIL);
+// }
 
-	buffer = 0;
-	ret = getline(&line, &buffer, FT_STDIN);
-	return (line && ret != -1 ? EXIT_OK : EXIT_FAIL);
+char		*read_line(void)
+{
+  char *line = NULL;
+  size_t bufsize = 0; // have getline allocate a buffer for us
+  getline(&line, &bufsize, stdin);
+  return line;
 }
+
 
 /*
 ** Shell looping function.
@@ -45,11 +60,13 @@ int			sh_loop(void)
 
 	ret = EXIT_OK;
 	loop = 1;
+	line = NULL;
 	while (loop)
 	{
-		printf("🍍 ");
-		if ((ret = read_input(line)))
-			break ;
+		printf("🍍  > ");
+		// if ((ret = read_input(&line)))
+		// 	break ;
+		line = read_line();
 		free(line);
 		// free(args);
 	}
