@@ -13,6 +13,7 @@
 // #include "minishell.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 /*
 ** Macros
@@ -62,11 +63,11 @@ char		**get_args(char *line)
 		if (buff < i)
 		{
 			buff += BUFF_SIZE;
-			tokens = realloc(tokens, bufsize * sizeof(char *));
+			tokens = realloc(tokens, buff * sizeof(char *));
 			if (!token)
 				ft_error(g_app, ERR_MEM);
 		}
-		token = strtok(NULL, TOK_DELIM)
+		token = strtok(NULL, TOK_DELIM);
 	}
 	tokens[i] = NULL;
 	return (tokens);
@@ -94,7 +95,7 @@ int			read_input(char **line)
 ** Shell looping function.
 */
 
-int			sh_loop(char *bin, char *opt)
+int			sh_loop(void)
 {
 	int		ret;
 	int		loop;
@@ -110,6 +111,7 @@ int			sh_loop(char *bin, char *opt)
 		if ((ret = read_input(&line)) == EXIT_FAIL)
 			break ;
 		free(line);
+		line = NULL;
 	}
 	return (ret);
 }
