@@ -15,19 +15,73 @@
 #include <stdlib.h>
 
 /*
-** ...
+** Macros
 */
 
-# define STDIN			(0)
 # define EXIT_OK		(0)
 # define EXIT_FAIL		(1)
-# define BUFF_SIZE		(8)
+# define ERR_MEM		(2)
+# define BUFF_SIZE		(64)
+# define TOK_DELIM		(" \t\r\n\a")
+
+/*
+** Globals
+*/
+
+char	*g_app = NULL;
+
+// -----------------------------------------------------------------------------
+
+void		ft_error(char *bin, int err)
+{
+	if (err == ERR_MEM)
+		printf("%s: allocation error\n", bin);
+	return (exit(err));
+}
+
+/*
+** Get the line arguments from the user input.
+*/
+
+char		**get_args(char *line)
+{
+	int		i;
+	int		buff;
+	char	*token;
+	char	**tokens;
+
+	i = 0;
+	buff = BUFF_SIZE;
+
+	tokens = (char **)malloc(sizeof(char *));
+	if (!tokens)
+		ft_error(g_app, ERR_MEM);
+	token = strtok(line, TOK_DELIM);
+	// refactor this
+	while (token)
+	{
+		tokens[i] = token;
+		i += 1;
+		if (buff < i)
+		{
+			buff += BUFF_SIZE;
+			tokens = realloc(tokens, bufsize * sizeof(char *));
+			if (!token)
+				ft_error(g_app, ERR_MEM);
+		}
+		token = strtok(NULL, TOK_DELIM)
+	}
+	tokens[i] = NULL;
+	return (tokens);
+}
+
+// -----------------------------------------------------------------------------
 
 /*
 ** Read user input.
 */
 
-static int	read_input(char **line)
+int			read_input(char **line)
 {
 	int		ret;
 	size_t	buffer;
@@ -37,11 +91,13 @@ static int	read_input(char **line)
 	return (line && ret != -1 ? EXIT_OK : EXIT_FAIL);
 }
 
+// -----------------------------------------------------------------------------
+
 /*
 ** Shell looping function.
 */
 
-int			sh_loop(void)
+int			sh_loop(char *bin, char *opt)
 {
 	int		ret;
 	int		loop;
@@ -56,9 +112,7 @@ int			sh_loop(void)
 		printf("🍍  > ");
 		if ((ret = read_input(&line)) == EXIT_FAIL)
 			break ;
-		// line = read_line();
 		free(line);
-		// free(args);
 	}
 	return (ret);
 }
@@ -69,9 +123,9 @@ int			sh_loop(void)
 ** Print usage message.
 */
 
-static void	print_usage(char *bin)
+static void	print_usage()
 {
-	printf("usage: %s [option]\n", bin);
+	printf("usage: %s\n", g_app);
 	return ;
 }
 
@@ -84,11 +138,10 @@ int			main(int argc, char *argv[])
 	int		ret;
 
 	ret = EXIT_OK;
+	g_app = argv[0];
 	if (argc == 1)
 		ret = sh_loop();
-	else if (argc == 2)
-		ret = sh_loop();
-	else if (argc > 2)
-		print_usage(argv[0]);
+	else
+		print_usage();
 	return (ret);
 }
