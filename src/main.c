@@ -18,9 +18,10 @@
 ** ...
 */
 
-# define FT_STDIN		(0)
+# define STDIN			(0)
 # define EXIT_OK		(0)
 # define EXIT_FAIL		(1)
+# define BUFF_SIZE		(8)
 
 /*
 ** Read user input.
@@ -31,7 +32,7 @@ static int	read_input(char **line)
 	int		ret;
 	size_t	buffer;
 
-	buffer = 8;
+	buffer = BUFF_SIZE;
 	ret = getline(line, &buffer, stdin);
 	return (line && ret != -1 ? EXIT_OK : EXIT_FAIL);
 }
