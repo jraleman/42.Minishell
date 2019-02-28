@@ -50,18 +50,15 @@ char		**get_args(char *line)
 	char	*token;
 	char	**tokens;
 
-	i = 0;
+	i = -1;
 	buff = BUFF_SIZE;
-
 	tokens = (char **)malloc(sizeof(char *));
 	if (!tokens)
 		ft_error(g_app, ERR_MEM);
 	token = strtok(line, TOK_DELIM);
-	// refactor this
 	while (token)
 	{
-		tokens[i] = token;
-		i += 1;
+		tokens[++i] = token;
 		if (buff < i)
 		{
 			buff += BUFF_SIZE;
