@@ -45,7 +45,7 @@ void		ft_error(char *bin, int err)
 }
 
 // -----------------------------------------------------------------------------
-// sh_loop.c
+// minishell.c
 
 /*
 ** Get the line arguments from the user input.
@@ -135,7 +135,7 @@ static int	run_cmd(char **args)
 ** Shell looping function.
 */
 
-int			sh_loop(void)
+int			minishell(void)
 {
 	int		ret;
 	int		loop;
@@ -185,7 +185,7 @@ int			main(int argc, char *argv[])
 	ret = EXIT_OK;
 	g_app = argv[0];
 	if (argc == 1)
-		ret = sh_loop();
+		ret = minishell();
 	else
 		print_usage();
 	return (ret);
