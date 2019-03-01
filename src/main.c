@@ -11,6 +11,8 @@
 /* ************************************************************************** */
 
 // #include "minishell.h"
+// fork(); execvp();   |||||||||    execve();
+#include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -20,8 +22,8 @@
 */
 
 # define EXIT_OK		(0)
-# define EXIT_FAIL		(1)
-# define ERR_MEM		(2)
+# define EXIT_FAIL		(-1)
+# define ERR_MEM		(-2)
 # define BUFF_SIZE		(64)
 # define TOK_DELIM		(" \t\r\n\a")
 # define CMD_PRMPT		("🍍  > ")
@@ -33,6 +35,7 @@
 char	*g_app = NULL;
 
 // -----------------------------------------------------------------------------
+// utils.c
 
 void		ft_error(char *bin, int err)
 {
@@ -41,11 +44,14 @@ void		ft_error(char *bin, int err)
 	return (exit(err));
 }
 
+// -----------------------------------------------------------------------------
+// sh_loop.c
+
 /*
 ** Get the line arguments from the user input.
 */
 
-char		**get_args(char *line)
+static char	**get_args(char *line)
 {
 	int		i;
 	int		buff;
@@ -74,13 +80,11 @@ char		**get_args(char *line)
 	return (tokens);
 }
 
-// -----------------------------------------------------------------------------
-
 /*
 ** Read user input.
 */
 
-int			read_input(char **line)
+static int	read_input(char **line)
 {
 	int		ret;
 	size_t	buffer;
@@ -90,7 +94,42 @@ int			read_input(char **line)
 	return (line && ret != -1 ? EXIT_OK : EXIT_FAIL);
 }
 
-// -----------------------------------------------------------------------------
+/*
+** Starts a new process to run a command.
+*/
+
+static int	run_cmd(char **args)
+{
+	int		ret;
+	int		status;
+	pid_t	pid;
+	pid_t	wpid;
+
+	ret = 1;
+	status = 0;
+	pid = fork();
+	if (!pid)
+	{
+		// child
+		if (execvp(args[0], args) == -1)
+		// if (execve(args[0], args) == -1)
+			perror("minishell"); // ???
+		ret = EXIT_FAIL;
+	}
+	else if (pid < 0)
+		perror("minishell");
+	else
+	{
+		// while (status && !WIFEXITED(status))
+		// printf("%i\n", status);
+		wpid = waitpid(pid, &status, WUNTRACED);
+		// printf("%i\n", status);
+		// printf("%d\n", wpid);
+		while (!WIFEXITED(status) && !WIFSIGNALED(status))
+			wpid = waitpid(pid, &status, WUNTRACED);
+	}
+	return (ret);
+}
 
 /*
 ** Shell looping function.
@@ -112,15 +151,18 @@ int			sh_loop(void)
 		if ((ret = read_input(&line)) == EXIT_FAIL)
 			break ;
 		args = get_args(line);
-		// ... run_cmd(args);
-		free(args);
+		if ((ret = run_cmd(args)) == EXIT_FAIL)
+			break ;
 		free(line);
 		line = NULL;
+		free(args);
+		// args = NULL;
 	}
 	return (ret);
 }
 
 // -----------------------------------------------------------------------------
+// main.c
 
 /*
 ** Print usage message.
