@@ -45,7 +45,38 @@ void		ft_error(char *bin, int err)
 }
 
 // -----------------------------------------------------------------------------
+// builtins.c
+
+char *builtin_str[] =
+{
+  "cd",
+  "help",
+  "exit"
+};
+
+int (*builtin_func[])(char **) =
+{
+	&cmd_cd,
+	&cmd_help,
+	&cmd_exit
+};
+
+// -----------------------------------------------------------------------------
 // minishell.c
+
+/*
+** Read user input.
+*/
+
+static int	read_input(char **line)
+{
+	int		ret;
+	size_t	buffer;
+
+	buffer = BUFF_SIZE;
+	ret = getline(line, &buffer, stdin);
+	return (line && ret != -1 ? EXIT_OK : EXIT_FAIL);
+}
 
 /*
 ** Get the line arguments from the user input.
@@ -81,20 +112,6 @@ static char	**get_args(char *line)
 }
 
 /*
-** Read user input.
-*/
-
-static int	read_input(char **line)
-{
-	int		ret;
-	size_t	buffer;
-
-	buffer = BUFF_SIZE;
-	ret = getline(line, &buffer, stdin);
-	return (line && ret != -1 ? EXIT_OK : EXIT_FAIL);
-}
-
-/*
 ** Starts a new process to run a command.
 */
 
@@ -113,11 +130,11 @@ static int	run_cmd(char **args)
 		// child
 		if (execvp(args[0], args) == -1)
 		// if (execve(args[0], args) == -1)
-			perror("minishell"); // ???
+			perror(g_app); // ???
 		ret = EXIT_FAIL;
 	}
 	else if (pid < 0)
-		perror("minishell");
+		perror(g_app);
 	else
 	{
 		// while (status && !WIFEXITED(status))
