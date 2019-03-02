@@ -47,19 +47,24 @@ void		ft_error(char *bin, int err)
 // -----------------------------------------------------------------------------
 // builtins.c
 
-char *builtin_str[] =
+char		*builtin_str[] =
 {
   "cd",
   "help",
   "exit"
 };
 
-int (*builtin_func[])(char **) =
+int			(*builtin_func[])(char **) =
 {
 	&cmd_cd,
 	&cmd_help,
 	&cmd_exit
 };
+
+int			get_builtins_total(void)
+{
+	return (sizeof(builtin_str) / sizeof(char *));
+}
 
 // -----------------------------------------------------------------------------
 // minishell.c
