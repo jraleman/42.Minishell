@@ -27,6 +27,7 @@
 # define BUFF_SIZE		(64)
 # define TOK_DELIM		(" \t\r\n\a")
 # define CMD_PRMPT		("🍍  > ")
+# define AUTHOR			("Jose Ramon Aleman")
 
 /*
 ** Globals
@@ -61,7 +62,7 @@ int			(*builtin_func[])(char **) =
 	&cmd_exit
 };
 
-int			get_builtins_total(void)
+int			builtins_total(void)
 {
 	return (sizeof(builtin_str) / sizeof(char *));
 }
@@ -89,6 +90,26 @@ int			cmd_cd(char **args)
 
 // -----------------------------------------------------------------------------
 // cmd/cmd_help.c
+
+void		print_info(void)
+{
+	printf("%s's Minishell\n", AUTHOR);
+	printf("Type program names and arguments, and hit enter.\n");
+	return ;
+}
+
+int			cmd_help(void)
+{
+	int		i;
+
+	i = 0;
+	print_info();
+	printf("The following are built in:\n");
+	while (i < builtins_total)
+		printf("    %s\n", builtin_str[i]);
+	printf("Use the man command for information on other programs.\n");
+	return (1);
+}
 
 // -----------------------------------------------------------------------------
 // minishell.c
