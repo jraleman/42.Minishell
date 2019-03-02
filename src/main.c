@@ -165,7 +165,7 @@ static char	**get_args(char *line)
 ** Starts a new process to run a command.
 */
 
-static int	run_cmd(char **args)
+static int	launch_ps(char **args)
 {
 	int		ret;
 	int		status;
@@ -194,6 +194,26 @@ static int	run_cmd(char **args)
 		// printf("%d\n", wpid);
 		while (!WIFEXITED(status) && !WIFSIGNALED(status))
 			wpid = waitpid(pid, &status, WUNTRACED);
+	}
+	return (ret);
+}
+
+/*
+** Execute a command
+*/
+
+static int	run_cmd(char **args)
+{
+	int		ret;
+	int		i;
+
+	i = 1;
+	if (args[0])
+	{
+		while (i < builtins_total)
+			if (!strcmp(args[0], builtin_str[i]))
+				break ;
+		ret = (i < builtins_total ? (*builtin_func[i](args)) : launch_ps(args));
 	}
 	return (ret);
 }
