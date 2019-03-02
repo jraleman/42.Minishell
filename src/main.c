@@ -30,6 +30,14 @@
 # define AUTHOR			("Jose Ramon Aleman")
 
 /*
+** Function prototypes
+*/
+
+int			cmd_exit(void);
+int			cmd_help(void);
+int			cmd_cd(char **args);
+
+/*
 ** Globals
 */
 
@@ -72,7 +80,7 @@ int			builtins_total(void)
 
 int			cmd_exit(void)
 {
-	return (EXIT_OK)
+	return (EXIT_OK);
 }
 
 // -----------------------------------------------------------------------------
