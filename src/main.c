@@ -50,8 +50,8 @@
 ** Function prototypes
 */
 
-int			cmd_exit(void);
-int			cmd_help(void);
+int			cmd_exit(char **args);
+int			cmd_help(char **args);
 int			cmd_cd(char **args);
 
 /*
@@ -95,8 +95,9 @@ int			builtins_total(void)
 // -----------------------------------------------------------------------------
 // cmd/cmd_exit.c
 
-int			cmd_exit(void)
+int			cmd_exit(char **args)
 {
+	args = NULL;
 	return (EXIT_OK);
 }
 
@@ -123,14 +124,15 @@ void		print_info(void)
 	return ;
 }
 
-int			cmd_help(void)
+int			cmd_help(char **args)
 {
 	int		i;
 
 	i = 0;
+	(void)args;
 	print_info();
 	printf("The following are built in:\n");
-	while (i < builtins_total)
+	while (i < (int)builtins_total)
 		printf("    %s\n", builtin_str[i]);
 	printf("Use the man command for information on other programs.\n");
 	return (1);
@@ -235,10 +237,11 @@ static int	run_cmd(char **args)
 	i = 1;
 	if (args[0])
 	{
-		while (i < builtins_total)
+		while (i < (int)builtins_total)
 			if (!strcmp(args[0], builtin_str[i]))
 				break ;
-		ret = (i < builtins_total ? (*builtin_func[i](args)) : launch_ps(args));
+		ret = (i < (int)builtins_total \
+			? (builtin_func[i](args)) : launch_ps(args));
 	}
 	return (ret);
 }
@@ -268,7 +271,6 @@ int			minishell(void)
 		free(line);
 		line = NULL;
 		free(args);
-		// args = NULL;
 	}
 	return (ret);
 }
