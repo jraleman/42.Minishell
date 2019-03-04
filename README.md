@@ -2,6 +2,8 @@
 
 ## About
 
+### Instructions
+
 - You must program a *mini UNIX command interpreter*.
 - This interpreter must display a prompt (a simple `$> ` for example)
   and wait till you type a command line, validated by pressing enter.
@@ -26,7 +28,7 @@
 - You can choose as a reference whatever shell you prefer.
 - You must manage expansions `$` and `~`
 
-### Allowed Functions
+#### Allowed Functions
 
 - malloc, free
 - access
@@ -38,6 +40,44 @@
 - wait, waitpid, wait3, wait4
 - signal, kill
 - exit
+
+## Project Structure
+
+### Source files
+
+```
+src/
+├── builtins
+│   ├── builtins.c
+│   ├── cmd
+│   │   ├── baguette.c
+│   │   ├── cd.c
+│   │   ├── echo.c
+│   │   ├── env.c
+│   │   ├── exit.c
+│   │   ├── help.c
+│   │   ├── konami.c
+│   │   └── setenv.c
+│   └── get_total.c
+├── main.c
+├── main.o
+├── minishell.c
+└── utils
+    └── ft_error.c
+
+3 directories, 14 files
+```
+
+### Header files
+
+```
+includes/
+├── builtins.h
+├── minishell.h
+└── utils.h
+
+0 directories, 3 filess
+```
 
 ## Sources
 
