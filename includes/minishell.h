@@ -51,10 +51,10 @@
 
 # define BUFF_SIZE		      (64)
 # define TOK_DELIM		      (" \t\r\n\a")
-# define PRMPT_EMJ          (🍍)
-# define PRMPT_BNS          (🐢)
+# define PRMPT_DFL          ("🍍")
+# define PRMPT_BNS          ("🐢")
 # define NUM_ICONS          (2)
-# define CMD_PRMPT(icon)		(#icon "  > ")
+# define CMD_PRMPT(icon)		("%s  > "), #icon
 
 /*
 ** Function prototypes

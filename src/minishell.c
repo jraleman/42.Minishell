@@ -13,8 +13,6 @@
 #include "minishell.h"
 
 char	*g_app;
-// char	*g_builtin_str[];
-// int  (*builtin_func[](char **);
 
 /*
 ** Read user input.
@@ -79,21 +77,15 @@ static int	launch_ps(char **args)
 	pid = fork();
 	if (!pid)
 	{
-		// child
 		if (execvp(args[0], args) == -1)
-		// if (execve(args[0], args) == -1)
-			perror(g_app); // ???
+			perror(g_app);
 		ret = EXIT_FAILURE;
 	}
 	else if (pid < 0)
 		perror(g_app);
 	else
 	{
-		// while (status && !WIFEXITED(status))
-		// printf("%i\n", status);
 		wpid = waitpid(pid, &status, WUNTRACED);
-		// printf("%i\n", status);
-		// printf("%d\n", wpid);
 		while (!WIFEXITED(status) && !WIFSIGNALED(status))
 			wpid = waitpid(pid, &status, WUNTRACED);
 	}
@@ -130,15 +122,18 @@ int			minishell(void)
 {
 	int		ret;
 	int		loop;
+	char	*prmpt;
 	char	*line;
 	char	**args;
 
 	ret =  EXIT_SUCCESS;
 	loop = 1;
 	line = NULL;
+	// bonus || easter egg
+	prmpt = (0 ? PRMPT_BNS : PRMPT_DFL);
 	while (loop)
 	{
-		printf(CMD_PRMPT(PRMPT_EMJ));
+		printf(CMD_PRMPT(prmpt));
 		if ((ret = read_input(&line)) == EXIT_FAILURE)
 			break ;
 		args = get_args(line);

@@ -20,7 +20,7 @@
 # ifndef GLOBAL_VAR
 #  define GLOBAL_VAR
 
-char	*g_app = NULL;
+extern char   *g_app;
 
 # endif
 

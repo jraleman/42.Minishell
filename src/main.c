@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-char	*g_app;
+char	*g_app = NULL;
 
 /*
 ** Print usage message.
