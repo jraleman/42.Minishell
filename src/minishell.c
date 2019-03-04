@@ -12,6 +12,10 @@
 
 #include "minishell.h"
 
+char	*g_app;
+// char	*g_builtin_str[];
+// int  (*builtin_func[](char **);
+
 /*
 ** Read user input.
 */
@@ -113,7 +117,7 @@ static int	run_cmd(char **args)
 			if (!strcmp(args[0], g_builtin_str[i]))
 				break ;
 		ret = (i < (int)builtins_get_total \
-			? (builtin_func[i](args)) : launch_ps(args));
+			? (g_builtin_func[i](args)) : launch_ps(args));
 	}
 	return (ret);
 }

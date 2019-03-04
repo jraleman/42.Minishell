@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd_exit.c                                         :+:      :+:    :+:   */
+/*   global.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaleman <jaleman@student.42.us.org>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,14 +10,18 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtins.h"
+#ifndef GLOBAL_H
+# define GLOBAL_H
 
 /*
-** ...
+** Global vars
 */
 
-int   cmd_konami(char **args)
-{
-  (void)args;
-  return (1);
-}
+# ifndef GLOBAL_VAR
+#  define GLOBAL_VAR
+
+char	*g_app = NULL;
+
+# endif
+
+#endif

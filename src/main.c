@@ -12,11 +12,7 @@
 
 #include "minishell.h"
 
-/*
-** Global vars ini
-*/
-
-// char *g_app;
+char	*g_app;
 
 /*
 ** Print usage message.

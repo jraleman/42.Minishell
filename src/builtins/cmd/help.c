@@ -35,8 +35,8 @@ int					cmd_help(char **args)
 	(void)args;
 	print_info();
 	printf("The following are built in:\n");
-	while (i < (int)builtins_total)
-		printf("    %s\n", builtin_str[i]);
+	while (i < (int)builtins_get_total)
+		printf("    %s\n", g_builtin_str[i]);
 	printf("Use the man command for information on other programs.\n");
 	return (1);
 }
