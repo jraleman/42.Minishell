@@ -14,20 +14,4 @@
 ** ...
 */
 
-char		*builtin_str[] =
-{
-  "cd",
-  "help",
-  "exit"
-};
-
-/*
-** ...
-*/
-
-int			(*builtin_func[])(char **) =
-{
-	&cmd_cd,
-	&cmd_help,
-	&cmd_exit
-};
+// ...do dispatch table here
