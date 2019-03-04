@@ -17,12 +17,12 @@
 - You must deal correctly with the PATH
   and the environment (copy of system char `**environ`).
 - You must implement a series of builtins:
+  - `exit`
   - `echo`
   - `cd`
   - `env`
     - `setenv`
     - `unsetenv`
-    - `exit`
 - You can choose as a reference whatever shell you prefer.
 - You must manage expansions `$` and `~`
 
