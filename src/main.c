@@ -13,6 +13,12 @@
 #include "minishell.h"
 
 /*
+** Global vars ini
+*/
+
+*g_app = NULL;
+
+/*
 ** Print usage message.
 */
 

@@ -13,6 +13,10 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+/*
+** Header files
+*/
+
 #include <sys/wait.h>
     // waitpid() and associated macros
 #include <unistd.h>
@@ -37,23 +41,30 @@
     // strcmp()
     // strtok()
 
-/*
-** Macros
-*/
-
-# define EXIT_OK		(0)
-# define EXIT_FAIL		(-1)
-# define ERR_MEM		(-2)
-# define BUFF_SIZE		(64)
-# define TOK_DELIM		(" \t\r\n\a")
-# define CMD_PRMPT		("🍍  > ")
-# define AUTHOR			("Jose Ramon Aleman")
+#include "utils.h"
+#include "builtins.h"
 
 /*
-** Globals
+** Defined macros
 */
 
-char	*g_app = NULL;
+# define ERR_MEM		        (-2)
+# define BUFF_SIZE		      (64)
+# define TOK_DELIM		      (" \t\r\n\a")
+# define PRMPT_EMJ          (🍍)
+# define PRMPT_BNS          (🐢)
+# define CMD_PRMPT(icon)		(#icon "  > ")
+
+/*
+** Global vars
+*/
+
+# ifndef GLOBAL_VAR
+#  define GLOBAL_VAR
+
+static const char	*g_app;
+
+# endif
 
 /*
 ** Function prototypes
