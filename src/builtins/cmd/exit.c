@@ -10,12 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "builtins.h"
+
 /*
 ** ...
 */
 
 int			cmd_exit(char **args)
 {
-	args = NULL;
-	return (EXIT_OK);
+	(void)args;
+	return (EXIT_SUCCESS);
 }

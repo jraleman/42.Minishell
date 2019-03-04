@@ -16,7 +16,7 @@
 ** Global vars ini
 */
 
-*g_app = NULL;
+// char *g_app;
 
 /*
 ** Print usage message.
@@ -36,7 +36,7 @@ int			main(int argc, char *argv[])
 {
 	int		ret;
 
-	ret = EXIT_OK;
+	ret =  EXIT_SUCCESS;
 	g_app = argv[0];
 	if (argc == 1)
 		ret = minishell();

@@ -10,11 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "builtins.h"
+
 /*
 ** ...
 */
 
-int			builtins_total(void)
+int			builtins_get_total(void)
 {
-	return (sizeof(builtin_str) / sizeof(char *));
+	return (sizeof(g_builtin_str) / sizeof(char *));
 }

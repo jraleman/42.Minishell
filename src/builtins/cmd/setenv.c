@@ -10,13 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "builtins.h"
 
 /*
 ** ...
 */
 
-int   cmd_setenv(void)
+int   cmd_setenv(char **args)
 {
+  (void)args
   return (1);
 }

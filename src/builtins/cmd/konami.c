@@ -10,13 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "builtins.h"
 
 /*
 ** ...
 */
 
-int   cmd_konami(void)
+int   cmd_konami(char **args)
 {
+  (void)args
   return (1);
 }

@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "minishell.h"
+
 /*
 ** Read user input.
 */
@@ -21,7 +23,7 @@ static int	read_input(char **line)
 
 	buffer = BUFF_SIZE;
 	ret = getline(line, &buffer, stdin);
-	return (line && ret != -1 ? EXIT_OK : EXIT_FAIL);
+	return (line && ret != -1 ?  EXIT_SUCCESS : EXIT_FAILURE);
 }
 
 /*
@@ -77,7 +79,7 @@ static int	launch_ps(char **args)
 		if (execvp(args[0], args) == -1)
 		// if (execve(args[0], args) == -1)
 			perror(g_app); // ???
-		ret = EXIT_FAIL;
+		ret = EXIT_FAILURE;
 	}
 	else if (pid < 0)
 		perror(g_app);
@@ -104,12 +106,13 @@ static int	run_cmd(char **args)
 	int		i;
 
 	i = 1;
+	ret = 1;
 	if (args[0])
 	{
-		while (i < (int)builtins_total)
-			if (!strcmp(args[0], builtin_str[i]))
+		while (i < (int)builtins_get_total)
+			if (!strcmp(args[0], g_builtin_str[i]))
 				break ;
-		ret = (i < (int)builtins_total \
+		ret = (i < (int)builtins_get_total \
 			? (builtin_func[i](args)) : launch_ps(args));
 	}
 	return (ret);
@@ -126,16 +129,16 @@ int			minishell(void)
 	char	*line;
 	char	**args;
 
-	ret = EXIT_OK;
+	ret =  EXIT_SUCCESS;
 	loop = 1;
 	line = NULL;
 	while (loop)
 	{
-		printf(CMD_PRMPT);
-		if ((ret = read_input(&line)) == EXIT_FAIL)
+		printf(CMD_PRMPT(PRMPT_EMJ));
+		if ((ret = read_input(&line)) == EXIT_FAILURE)
 			break ;
 		args = get_args(line);
-		if ((ret = run_cmd(args)) == EXIT_FAIL)
+		if ((ret = run_cmd(args)) == EXIT_FAILURE)
 			break ;
 		free(line);
 		line = NULL;

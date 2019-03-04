@@ -10,13 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "builtins.h"
 
 /*
 ** ...
 */
 
-int   cmd_baguette(void)
+int   cmd_baguette(char **args)
 {
+  (void)**args;
   return (1);
 }
