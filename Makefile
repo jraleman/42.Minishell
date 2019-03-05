@@ -37,6 +37,9 @@ all: $(NAME)
 	@printf "[minishell] Compiling [:.]\r"
 $(NAME): $(OBJ)
 	@printf "[minishell] Compiled successfuly! [OK]\n"
+	@gcc $(CFLAGS) $(OBJ) -o $(NAME)
+debug: $(OBJ)
+	@printf "[minishell] Compiled debug successfuly! [OK]\n"
 	@gcc $(CFLAGS) $(DEBUG) $(OBJ) -o $(NAME)
 clean:
 	@/bin/rm -f $(OBJ)
