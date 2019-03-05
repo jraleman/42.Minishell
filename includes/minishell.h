@@ -72,6 +72,6 @@
 /*
 ** Function prototypes
 */
-int			minishell(void);
+int			minishell(char *opt);
 
 #endif

@@ -130,7 +130,7 @@ static int	run_cmd(char **args)
 ** Shell looping function.
 */
 
-int			minishell(void)
+int			minishell(char *opt)
 {
 	int		ret;
 	int		loop;
@@ -143,7 +143,7 @@ int			minishell(void)
 	line = NULL;
 	while (loop)
 	{
-		prmpt = (0 ? PRMPT_BNS : PRMPT_DFL);
+		prmpt = (!strcmp(opt, "varela") ? PRMPT_BNS : PRMPT_DFL);
 		printf(CMD_PRMPT(prmpt));
 		if ((ret = read_input(&line)) == EXIT_FAILURE)
 			break ;
