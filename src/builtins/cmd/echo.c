@@ -18,7 +18,7 @@
 
 int			cmd_echo(char **args)
 {
-	// (void)**args;
-	printf("%s\n", args[1]);
+	if (*args)
+		printf("%s", (args[1] ? ft_strjoin((args[1]), "\n\0") : "\0"));
 	return (1);
 }
