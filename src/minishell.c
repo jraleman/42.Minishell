@@ -14,6 +14,16 @@
 
 char		*g_app;
 
+char		*g_builtin_str[] =
+{
+  "exit", "help", "env", "setenv", "cd", "echo", "baguette", "konami"
+};
+int			(*g_builtin_func[])(char **) =
+{
+  &cmd_exit, &cmd_help, &cmd_env, &cmd_setenv, &cmd_cd, &cmd_echo
+              , &cmd_baguette, &cmd_konami
+};
+
 /*
 ** Read user input.
 */
@@ -74,6 +84,7 @@ static int	launch_ps(char **args)
 
 	ret = 1;
 	status = 0;
+	printf("lollol\n");
 	pid = fork();
 	if (!pid)
 	{
@@ -101,15 +112,23 @@ static int	run_cmd(char **args)
 	int		ret;
 	int		i;
 
-	i = 1;
+	i = -1;
 	ret = 1;
+	// printf("%s\n", (char *)g_builtin_str[1]);
 	if (args[0])
 	{
-		while (i < (int)builtins_get_total)
-			if (!strcmp(args[0], g_builtin_str[i]))
+		// printf("%d\n", builtins_get_total);
+		while (++i < (int)builtins_get_total)
+		{
+			// printf("1\n");
+			// printf("%i\n", builtins_get_total);
+			if (!strcmp(args[0], (char *)g_builtin_str[i]))
 				break ;
+			// printf("2\n");
+		}
+
 		ret = (i < (int)builtins_get_total \
-			? (g_builtin_func[i](args)) : launch_ps(args));
+			? ((int)g_builtin_func[i](args)) : launch_ps(args));
 	}
 	return (ret);
 }

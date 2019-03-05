@@ -15,6 +15,9 @@
 
 /*
 ** Global vars
+** - App name
+** - Builtin list
+** - Dispatch table func
 */
 # ifndef GLOBAL_VAR
 #  define GLOBAL_VAR

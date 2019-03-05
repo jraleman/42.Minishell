@@ -53,8 +53,7 @@
 # include <string.h>
 
 /*
-** - strcmp()
-** - strtok()
+** - Local header files
 */
 # include "utils.h"
 # include "global.h"
@@ -65,6 +64,20 @@
 # define AUTHOR				("Jose Ramon Aleman")
 # define BLTNS_NUM			(8)
 # define BLTNS_CMDS(...)	__VA_ARGS__
+
+/*
+** Global vars
+** - App name
+** - Builtin list
+** - Dispatch table func
+*/
+# ifndef GLOBAL_VAR
+#  define GLOBAL_VAR
+
+extern char		*g_builtin_str[];
+extern int		(*g_builtin_func[])(char **);
+
+# endif
 
 /*
 ** Function prototypes
@@ -78,22 +91,5 @@ int				cmd_cd(char** args);
 int				cmd_echo(char** args);
 int				cmd_baguette(char** args);
 int				cmd_konami(char** args);
-
-/*
-** Builtin Structure
-*/
-static char		*g_builtin_str[] =\
-{
-  // BLTNS_CMDS("exit", "help", "env", "setenv", "cd", "echo" \
-                // , "baguette", "konami")
-  "exit", "help", "env", "setenv", "cd", "echo", "baguette", "konami"
-};
-static int		(*g_builtin_func[])(char **) =\
-{
-  // BLTNS_CMDS(&cmd_exit, &cmd_help, &cmd_env, &cmd_setenv, &cmd_cd, &cmd_echo \
-           // , &cmd_baguette, &cmd_konami)
-  &cmd_exit, &cmd_help, &cmd_env, &cmd_setenv, &cmd_cd, &cmd_echo
-              , &cmd_baguette, &cmd_konami
-};
 
 #endif
