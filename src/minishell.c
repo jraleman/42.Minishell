@@ -113,12 +113,13 @@ static int	run_cmd(char **args)
 	int		i;
 
 	i = -1;
-	ret = 1;
+	ret = 0;
 	// printf("%s\n", (char *)g_builtin_str[1]);
 	if (args[0])
 	{
 		// printf("%d\n", builtins_get_total);
-		while (++i < (int)builtins_get_total)
+		// while (++i < (int)builtins_get_total)
+		while (++i < BLTNS_NUM)
 		{
 			// printf("1\n");
 			// printf("%i\n", builtins_get_total);
@@ -127,9 +128,13 @@ static int	run_cmd(char **args)
 			// printf("2\n");
 		}
 
-		ret = (i < (int)builtins_get_total \
+		// ret = (i < (int)builtins_get_total \
+		// 	? ((int)g_builtin_func[i](args)) : launch_ps(args));
+		ret = (i < BLTNS_NUM \
 			? ((int)g_builtin_func[i](args)) : launch_ps(args));
 	}
+	printf("lol\n");
+	printf("%i\n", EXIT_FAILURE);
 	return (ret);
 }
 

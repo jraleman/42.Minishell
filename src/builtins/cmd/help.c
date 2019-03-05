@@ -31,11 +31,11 @@ int			cmd_help(char **args)
 {
 	int		i;
 
-	i = 0;
+	i = -1;
 	(void)args;
 	print_info();
 	printf("The following are built in:\n");
-	while (i < (int)builtins_get_total)
+	while (++i < BLTNS_NUM)
 		// printf("    %s\n", g_builtin_str[i]);
 		printf("    %s\n", "lol");
 	printf("Use the man command for information on other programs.\n");
