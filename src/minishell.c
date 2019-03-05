@@ -54,7 +54,7 @@ static char	**get_args(char *line)
 	tokens = (char **)malloc(sizeof(char *));
 	if (!tokens)
 		ft_error(g_app, ERR_MEM);
-	token = strtok(line, TOK_DELIM);
+	token = (line ? strtok(line, TOK_DELIM) : NULL);
 	while (token)
 	{
 		tokens[++i] = token;
@@ -67,7 +67,7 @@ static char	**get_args(char *line)
 		}
 		token = strtok(NULL, TOK_DELIM);
 	}
-	tokens[i + 1] = NULL;
+	tokens[++i] = NULL;
 	return (tokens);
 }
 
@@ -83,10 +83,10 @@ static int	launch_ps(char **args)
 	pid_t	wpid;
 
 	ret = 1;
-	status = 0;
+	status = 1;
 	wpid = 0;
 	pid = fork();
-	if (!pid)
+	if (args && !pid)
 	{
 		printf("process doesn't exist\n");
 		if (execvp(args[0], args) == -1)
@@ -101,7 +101,7 @@ static int	launch_ps(char **args)
 	else
 	{
 		// ???
-		wpid = waitpid(pid, &status, WUNTRACED);
+		// wpid = waitpid(pid, &status, WUNTRACED);
 		while (!WIFEXITED(status) && !WIFSIGNALED(status))
 			wpid = waitpid(pid, &status, WUNTRACED);
 	}
@@ -119,7 +119,7 @@ static int	run_cmd(char **args)
 
 	i = -1;
 	ret = 1;
-	if (args[0])
+	if (args && args[0])
 	{
 		while (++i < BLTNS_NUM)
 		{
@@ -155,12 +155,11 @@ int			minishell(char *opt)
 		if ((ret = read_input(&line)) == EXIT_FAILURE)
 			break ;
 		args = get_args(line);
-		// if (!(ret = run_cmd(args)))
-			// break ;
 		loop = run_cmd(args);
 		free(line);
 		line = NULL;
 		free(args);
+		args = NULL;
 	}
 	return (ret);
 }
