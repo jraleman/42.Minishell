@@ -17,3 +17,20 @@
 */
 
 // ...do dispatch table here
+
+/*
+
+
+static char *g_builtin_str[] =\
+{
+  BLTNS_CMDS("exit", "help", "env", "setenv", "cd", "echo" \
+                 , "baguette", "konami")
+};
+static int  (*g_builtin_func[])(char **) =\
+{
+  BLTNS_CMDS(&cmd_exit, &cmd_help, &cmd_env, &cmd_setenv, &cmd_cd, &cmd_echo\
+            	, &cmd_baguette, &cmd_konami)
+};
+
+
+*/

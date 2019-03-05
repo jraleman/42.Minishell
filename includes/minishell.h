@@ -54,7 +54,7 @@
 # define PRMPT_DFL          ("🍍")
 # define PRMPT_BNS          ("🐢")
 # define NUM_ICONS          (2)
-# define CMD_PRMPT(icon)		("%s  > "), #icon
+# define CMD_PRMPT(icon)		("%s  > "), (icon)
 
 /*
 ** Function prototypes
