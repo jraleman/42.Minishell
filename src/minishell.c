@@ -84,7 +84,6 @@ static int	launch_ps(char **args)
 
 	ret = 1;
 	status = 0;
-	printf("lollol\n");
 	pid = fork();
 	if (!pid)
 	{
@@ -113,28 +112,17 @@ static int	run_cmd(char **args)
 	int		i;
 
 	i = -1;
-	ret = 0;
-	// printf("%s\n", (char *)g_builtin_str[1]);
+	ret = 1;
 	if (args[0])
 	{
-		// printf("%d\n", builtins_get_total);
-		// while (++i < (int)builtins_get_total)
 		while (++i < BLTNS_NUM)
 		{
-			// printf("1\n");
-			// printf("%i\n", builtins_get_total);
 			if (!strcmp(args[0], (char *)g_builtin_str[i]))
 				break ;
-			// printf("2\n");
 		}
-
-		// ret = (i < (int)builtins_get_total \
-		// 	? ((int)g_builtin_func[i](args)) : launch_ps(args));
-		ret = (i < BLTNS_NUM \
-			? ((int)g_builtin_func[i](args)) : launch_ps(args));
+		ret = (i < BLTNS_NUM ? ((int)g_builtin_func[i](args)) \
+				: launch_ps(args));
 	}
-	printf("lol\n");
-	printf("%i\n", EXIT_FAILURE);
 	return (ret);
 }
 
@@ -160,7 +148,7 @@ int			minishell(void)
 		if ((ret = read_input(&line)) == EXIT_FAILURE)
 			break ;
 		args = get_args(line);
-		if ((ret = run_cmd(args)) == EXIT_FAILURE)
+		if (!(ret = run_cmd(args)))
 			break ;
 		free(line);
 		line = NULL;

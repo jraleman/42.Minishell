@@ -18,6 +18,6 @@
 
 int			cmd_echo(char **args)
 {
-	(void)args;
+	(void)**args;
 	return (1);
 }
