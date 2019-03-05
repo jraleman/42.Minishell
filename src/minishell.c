@@ -67,7 +67,7 @@ static char	**get_args(char *line)
 		}
 		token = strtok(NULL, TOK_DELIM);
 	}
-	tokens[i] = NULL;
+	tokens[i + 1] = NULL;
 	return (tokens);
 }
 
