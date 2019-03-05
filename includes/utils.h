@@ -17,6 +17,7 @@
 ** - printf()
 */
 # include <stdio.h>
+# include <string.h>
 
 /*
 ** - exit()
@@ -32,5 +33,6 @@
 ** Function prototypes
 */
 void			ft_error(char *bin, int err);
+char			*ft_strjoin(char const *s1, char const *s2);
 
 #endif

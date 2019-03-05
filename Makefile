@@ -23,7 +23,8 @@ SRC			= src/main.c \
 			  src/builtins/cmd/help.c \
 			  src/builtins/cmd/konami.c \
 			  src/builtins/cmd/setenv.c \
-			  src/utils/ft_error.c
+			  src/utils/ft_error.c \
+			  src/utils/ft_strjoin.c
 INC			= includes/
 CC			= gcc
 CFLAGS		= -Wall -Werror -Wextra -I $(INC)
