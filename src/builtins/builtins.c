@@ -17,15 +17,22 @@
 */
 
 /*
+
+// ...set string names of builtins command
+static void			set_builtins(t_builtins *blt);
 // ...do dispatch table here
-static char *g_builtin_str[] =\
+static void			dispatch_table(t_builtins *blt);
+
+t_builtins			*init_builtins(void)
 {
-  BLTNS_CMDS("exit", "help", "env", "setenv", "cd", "echo" \
-                 , "baguette", "konami")
-};
-static int  (*g_builtin_func[])(char **) =\
-{
-  BLTNS_CMDS(&cmd_exit, &cmd_help, &cmd_env, &cmd_setenv, &cmd_cd, &cmd_echo\
-            	, &cmd_baguette, &cmd_konami)
-};
+	t_builtins		blt;
+
+	blt = (t_builtins *)blt(sizeof(t_builtins));
+	if (blt)
+	{
+		// init strings
+		// init func
+	}
+	return (blt);
+}
 */
