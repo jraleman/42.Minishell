@@ -26,7 +26,7 @@ SRC			= src/main.c \
 					src/utils/ft_error.c
 INC			= includes/
 CC			= gcc
-CFLAGS	= -Wall -Werror -Wextra -I $(INC)
+CFLAGS		= -Wall -Werror -Wextra -I $(INC)
 OBJ			= $(SRC:.c=.o)
 DEBUG		= #-g3 -fsanitize=address
 

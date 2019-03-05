@@ -13,21 +13,24 @@
 #ifndef UTILS_H
 # define UTILS_H
 
+/*
+** - printf()
+*/
 # include <stdio.h>
-    // printf()
+
+/*
+** - exit()
+*/
 # include <stdlib.h>
-    // exit()
 
 /*
 ** Defined macros
 */
-
-# define ERR_MEM        (2)
+# define ERR_MEM	(2)
 
 /*
 ** Function prototypes
 */
-
-void		ft_error(char *bin, int err);
+void			ft_error(char *bin, int err);
 
 #endif

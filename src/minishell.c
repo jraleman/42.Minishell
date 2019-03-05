@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-char	*g_app;
+char		*g_app;
 
 /*
 ** Read user input.
@@ -25,7 +25,7 @@ static int	read_input(char **line)
 
 	buffer = BUFF_SIZE;
 	ret = getline(line, &buffer, stdin);
-	return (line && ret != -1 ?  EXIT_SUCCESS : EXIT_FAILURE);
+	return (line && ret != -1 ? EXIT_SUCCESS : EXIT_FAILURE);
 }
 
 /*
@@ -126,13 +126,12 @@ int			minishell(void)
 	char	*line;
 	char	**args;
 
-	ret =  EXIT_SUCCESS;
+	ret = EXIT_SUCCESS;
 	loop = 1;
 	line = NULL;
-	// bonus || easter egg
-	prmpt = (0 ? PRMPT_BNS : PRMPT_DFL);
 	while (loop)
 	{
+		prmpt = (0 ? PRMPT_BNS : PRMPT_DFL);
 		printf(CMD_PRMPT(prmpt));
 		if ((ret = read_input(&line)) == EXIT_FAILURE)
 			break ;

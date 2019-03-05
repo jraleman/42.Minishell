@@ -12,13 +12,13 @@
 
 #include "minishell.h"
 
-char	*g_app = NULL;
+char		*g_app = NULL;
 
 /*
 ** Print usage message.
 */
 
-static void	print_usage()
+static void	print_usage(void)
 {
 	printf("usage: %s\n", g_app);
 	return ;
@@ -32,7 +32,7 @@ int			main(int argc, char *argv[])
 {
 	int		ret;
 
-	ret =  EXIT_SUCCESS;
+	ret = EXIT_SUCCESS;
 	g_app = argv[0];
 	if (argc == 1)
 		ret = minishell();

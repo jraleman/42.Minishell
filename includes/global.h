@@ -16,11 +16,10 @@
 /*
 ** Global vars
 */
-
 # ifndef GLOBAL_VAR
 #  define GLOBAL_VAR
 
-extern char   *g_app;
+extern char		*g_app;
 
 # endif
 

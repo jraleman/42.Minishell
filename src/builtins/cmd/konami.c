@@ -16,8 +16,8 @@
 ** ...
 */
 
-int   cmd_konami(char **args)
+int			cmd_konami(char **args)
 {
-  (void)args;
-  return (1);
+	(void)args;
+	return (1);
 }

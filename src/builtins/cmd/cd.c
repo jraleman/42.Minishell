@@ -21,7 +21,6 @@ int			cmd_cd(char **args)
 	if (!args[1])
 		fprintf(stderr, "%s: expected argument to \"cd\"\n", g_app);
 	else
-		if (chdir(args[1]))
-			perror(g_app);
+		chdir(args[1]) ? perror(g_app) : 0;
 	return (1);
 }

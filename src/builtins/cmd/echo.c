@@ -16,8 +16,8 @@
 ** ...
 */
 
-int   cmd_echo(char **args)
+int			cmd_echo(char **args)
 {
-  (void)args;
-  return (1);
+	(void)args;
+	return (1);
 }

@@ -16,8 +16,8 @@
 ** ...
 */
 
-int   cmd_setenv(char **args)
+int			cmd_setenv(char **args)
 {
-  (void)args;
-  return (1);
+	(void)args;
+	return (1);
 }

@@ -16,8 +16,8 @@
 ** ...
 */
 
-int   cmd_baguette(char **args)
+int			cmd_baguette(char **args)
 {
-  (void)**args;
-  return (1);
+	(void)**args;
+	return (1);
 }

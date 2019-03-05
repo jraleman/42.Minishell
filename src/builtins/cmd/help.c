@@ -27,9 +27,9 @@ static void	print_info(void)
 ** ...
 */
 
-int					cmd_help(char **args)
+int			cmd_help(char **args)
 {
-	int				i;
+	int		i;
 
 	i = 0;
 	(void)args;
