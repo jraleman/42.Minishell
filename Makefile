@@ -12,23 +12,23 @@
 
 NAME		= minishell
 SRC			= src/main.c \
-					src/minishell.c \
-					src/builtins/builtins.c \
-					src/builtins/get_total.c \
-					src/builtins/cmd/baguette.c \
-					src/builtins/cmd/cd.c \
-					src/builtins/cmd/echo.c \
-					src/builtins/cmd/env.c \
-					src/builtins/cmd/exit.c \
-					src/builtins/cmd/help.c \
-					src/builtins/cmd/konami.c \
-					src/builtins/cmd/setenv.c \
-					src/utils/ft_error.c
+			  src/minishell.c \
+			  src/builtins/builtins.c \
+			  src/builtins/get_total.c \
+			  src/builtins/cmd/baguette.c \
+			  src/builtins/cmd/cd.c \
+			  src/builtins/cmd/echo.c \
+			  src/builtins/cmd/env.c \
+			  src/builtins/cmd/exit.c \
+			  src/builtins/cmd/help.c \
+			  src/builtins/cmd/konami.c \
+			  src/builtins/cmd/setenv.c \
+			  src/utils/ft_error.c
 INC			= includes/
 CC			= gcc
 CFLAGS		= -Wall -Werror -Wextra -I $(INC)
 OBJ			= $(SRC:.c=.o)
-DEBUG		= #-g3 -fsanitize=address
+DEBUG		= -g3 -fsanitize=address
 
 all: $(NAME)
 %.o: %.c
