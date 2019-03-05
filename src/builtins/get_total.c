@@ -23,6 +23,6 @@ int			builtins_get_total(void)
 	// printf("%s\n", g_builtin_str[0]);
 	// return (sizeof(g_builtin_str) / sizeof(char *));
 	// return (BLTNS_NUM / sizeof(char *));
-	// return (BLTNS_NUM);
-	return (8);
+	return (BLTNS_NUM);
+	// return (8);
 }

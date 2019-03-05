@@ -33,8 +33,9 @@ int			cmd_help(char **args)
 
 	char	*tmp_bltns[BLTNS_NUM] = {"exit", "help", "env", "setenv", "cd", "echo", "baguette", "konami"};
 
+	printf("%s\n", args[0]);
 	i = -1;
-	(void)**args;
+	// (void)**args;
 	print_info();
 	printf("The following are built in:\n");
 	while (++i < BLTNS_NUM)

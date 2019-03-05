@@ -19,7 +19,7 @@
 int			cmd_exit(char **args)
 {
 	// (void)args;
-	free(args);
+	// free(args);
 	args = NULL;
 	return (EXIT_SUCCESS);
 }

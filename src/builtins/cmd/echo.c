@@ -18,6 +18,7 @@
 
 int			cmd_echo(char **args)
 {
-	(void)**args;
+	// (void)**args;
+	printf("%s\n", args[1]);
 	return (1);
 }

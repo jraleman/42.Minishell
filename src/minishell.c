@@ -84,17 +84,23 @@ static int	launch_ps(char **args)
 
 	ret = 1;
 	status = 0;
+	wpid = 0;
 	pid = fork();
 	if (!pid)
 	{
+		printf("process doesn't exist\n");
 		if (execvp(args[0], args) == -1)
 			perror(g_app);
-		ret = EXIT_FAILURE;
+		ret = 0;
 	}
 	else if (pid < 0)
+	{
+		printf("general error\n");
 		perror(g_app);
+	}
 	else
 	{
+		// ???
 		wpid = waitpid(pid, &status, WUNTRACED);
 		while (!WIFEXITED(status) && !WIFSIGNALED(status))
 			wpid = waitpid(pid, &status, WUNTRACED);
@@ -141,6 +147,7 @@ int			minishell(char *opt)
 	ret = EXIT_SUCCESS;
 	loop = 1;
 	line = NULL;
+	// t_sh = set_options(t_sh sh, char *opt[])
 	while (loop)
 	{
 		prmpt = (opt && !strcmp(opt, "varela") ? PRMPT_BNS : PRMPT_DFL);
@@ -148,8 +155,9 @@ int			minishell(char *opt)
 		if ((ret = read_input(&line)) == EXIT_FAILURE)
 			break ;
 		args = get_args(line);
-		if (!(ret = run_cmd(args)))
-			break ;
+		// if (!(ret = run_cmd(args)))
+			// break ;
+		loop = run_cmd(args);
 		free(line);
 		line = NULL;
 		free(args);
