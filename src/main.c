@@ -20,7 +20,7 @@ char		*g_app = NULL;
 
 static void	print_usage(void)
 {
-	printf("usage: %s\n", g_app);
+	printf("usage: %s [option]\n", g_app);
 	return ;
 }
 

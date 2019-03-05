@@ -143,7 +143,7 @@ int			minishell(char *opt)
 	line = NULL;
 	while (loop)
 	{
-		prmpt = (!strcmp(opt, "varela") ? PRMPT_BNS : PRMPT_DFL);
+		prmpt = (opt && !strcmp(opt, "varela") ? PRMPT_BNS : PRMPT_DFL);
 		printf(CMD_PRMPT(prmpt));
 		if ((ret = read_input(&line)) == EXIT_FAILURE)
 			break ;
