@@ -12,15 +12,13 @@
 
 #include "minishell.h"
 
-char		*g_app = NULL;
-
 /*
 ** Print usage message.
 */
 
-static void	print_usage(void)
+static void	print_usage(char *app_name)
 {
-	printf("usage: %s [option]\n", g_app);
+	printf("usage: %s [option]\n", app_name);
 	return ;
 }
 
@@ -36,9 +34,11 @@ int			main(int argc, char *argv[])
 	g_app = argv[0];
 	if (argc == 1)
 		ret = minishell(NULL);
+		// ret = minishell(argv[0], NULL);
 	else if (argc == 2)
 		ret = minishell(argv[1]);
+		// ret = minishell(argv[0], argv[1]);
 	else
-		print_usage();
+		print_usage(argv[0]);
 	return (ret);
 }
