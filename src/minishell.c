@@ -147,9 +147,9 @@ int			minishell(char *bin, char *opt)
 	loop = 1;
 	line = NULL;
 	// t_sh = set_options(t_sh sh, char *opt[])
+	prmpt = (opt && !strcmp(opt, "varela") ? PRMPT_BNS : PRMPT_DFL);
 	while (loop)
 	{
-		prmpt = (opt && !strcmp(opt, "varela") ? PRMPT_BNS : PRMPT_DFL);
 		printf(CMD_PRMPT(PRMPT_DFL));
 		if ((ret = read_input(&line)) == EXIT_FAILURE)
 			break ;
@@ -160,7 +160,6 @@ int			minishell(char *bin, char *opt)
 		free(args);
 		args = NULL;
 	}
-	// ret == EXIT_FAILURE ? printf("WTF?!\n") : printf("☁️☁️☁️☁️☁️☁️☁️☁️☁️☁️☁️☁️☁️\n");
-	// ret == EXIT_FAILURE ? printf("%s\n", ICO_ERR) : printf("%s\n", ICO_DIV);
+	ret == EXIT_FAILURE ? printf("%s\n", ICON_ERRR) : printf("%s\n", ICON_LINE);
 	return (ret);
 }

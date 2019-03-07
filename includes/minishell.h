@@ -55,7 +55,6 @@
 /*
 ** Local header files
 */
-# include "global.h"
 # include "utils.h"
 # include "builtins.h"
 
@@ -66,6 +65,8 @@
 # define TOK_DELIM			(" \t\r\n\a")
 # define PRMPT_DFL			("🍍")
 # define PRMPT_BNS			("🐢")
+# define ICON_LINE			("☁️☁️☁️☁️☁️☁️☁️☁️☁️☁️☁️☁️☁️☁️☁️☁️☁️☁️☁️☁️☁️☁️☁️☁️☁️☁️☁️☁️☁️")
+# define ICON_ERRR			("💩")
 # define NUM_PRMPT			(2)
 # define CMD_PRMPT(PRMPT)	("%s  > "), (PRMPT)
 
