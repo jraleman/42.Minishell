@@ -66,12 +66,18 @@
 # define TOK_DELIM			(" \t\r\n\a")
 # define PRMPT_DFL			("🍍")
 # define PRMPT_BNS			("🐢")
-# define NUM_ICONS			(2)
-# define CMD_PRMPT(icon)	("%s  > "), (icon)
+# define NUM_PRMPT			(2)
+# define CMD_PRMPT(PRMPT)	("%s  > "), (PRMPT)
+
+// typedef struct		s_sh
+// {
+// 	wchar_t 		*prmpts[2];
+//
+// }					t_sh;
 
 /*
 ** Function prototypes
 */
-int			minishell(char *opt);
+int			minishell(char *bin, char *opt);
 
 #endif

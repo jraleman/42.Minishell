@@ -16,10 +16,10 @@
 ** Print usage message.
 */
 
-static void	print_usage(char *app_name)
+static int	print_usage(char *bin)
 {
-	printf("usage: %s [option]\n", app_name);
-	return ;
+	printf("usage: %s [option]\n", bin);
+	return (EXIT_SUCCESS);
 }
 
 /*
@@ -29,16 +29,17 @@ static void	print_usage(char *app_name)
 int			main(int argc, char *argv[])
 {
 	int		ret;
+	char	*bin;
+	char	*opt;
 
 	ret = EXIT_SUCCESS;
-	g_app = argv[0];
+	bin = argv[0];
+	opt = argv[1];
 	if (argc == 1)
-		ret = minishell(NULL);
-		// ret = minishell(argv[0], NULL);
+		ret = minishell(bin, NULL);
 	else if (argc == 2)
-		ret = minishell(argv[1]);
-		// ret = minishell(argv[0], argv[1]);
+		ret = minishell(bin, opt);
 	else
-		print_usage(argv[0]);
+		ret = print_usage(bin);
 	return (ret);
 }
