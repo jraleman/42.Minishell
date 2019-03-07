@@ -23,26 +23,22 @@
 ** allocated and the original object is freed.
 */
 
-void	*ft_realloc(void *ptr, size_t size)
+void	*ft_realloc(char *str, size_t size)
 {
-	void	*new_ptr;
+	char	*p;
+	size_t	i;
 
-	if (ptr)
+	p = NULL;
+	i = 0;
+	if (str)
 	{
-		if (size)
-		{
-			if (!(new_ptr = ft_memalloc(size)))
-				return (NULL);
-			ft_bzero(new_ptr, size);
-			ft_memcpy(new_ptr, ptr, size);
-		}
-		else
-		{
-			if (!(new_ptr = (unsigned char *)malloc(sizeof(ptr))))
-				return (NULL);
-		}
-		free(ptr);
-		return (new_ptr);
+		p = (char *)malloc(sizeof(char) * (size));
+		if (!p)
+			return (NULL);
+		ft_bzero(p, size);
+		ft_strcpy(p, str);
+		free(str);
+		str = NULL;
 	}
-	return ((unsigned char *)malloc(sizeof(ptr) * size));
+	return (p);
 }
