@@ -16,9 +16,9 @@ char		*g_builtin_str[] =
 {
   "exit", "help", "env", "setenv", "cd", "echo", "baguette", "konami"
 };
-int			(*g_builtin_func[])(char **) =
+int			(*g_builtin_func[])(char **, char *) =
 {
-  &cmd_exit, &cmd_help, &cmd_env, &cmd_setenv, &cmd_cd, &cmd_echo
+  &cmd_exit, &cmd_help, &cmd_env, &cmd_setenv, &cmd_echo
               , &cmd_baguette, &cmd_konami
 };
 
@@ -110,7 +110,7 @@ static int	launch_ps(char **args, char *bin)
 ** Execute a command
 */
 
-static int	run_cmd(char **args)
+static int	run_cmd(char **args, char *bin)
 {
 	int		ret;
 	int		i;
@@ -124,8 +124,8 @@ static int	run_cmd(char **args)
 			if (!strcmp(args[0], (char *)g_builtin_str[i]))
 				break ;
 		}
-		ret = (i < BLTNS_NUM ? ((int)g_builtin_func[i](args)) \
-				: launch_ps(args));
+		ret = (i < BLTNS_NUM ? ((int)g_builtin_func[i](args, bin)) \
+				: launch_ps(args, bin));
 	}
 	return (ret);
 }
@@ -153,13 +153,14 @@ int			minishell(char *bin, char *opt)
 		printf(CMD_PRMPT(PRMPT_DFL));
 		if ((ret = read_input(&line)) == EXIT_FAILURE)
 			break ;
-		args = get_args(line);
-		loop = run_cmd(args);
+		args = get_args(line, bin);
+		loop = run_cmd(args, bin);
 		free(line);
 		line = NULL;
 		free(args);
 		args = NULL;
 	}
-	ret == EXIT_FAILURE ? printf("WTF?!\n") : printf("Bye!\n");
+	// ret == EXIT_FAILURE ? printf("WTF?!\n") : printf("☁️☁️☁️☁️☁️☁️☁️☁️☁️☁️☁️☁️☁️\n");
+	// ret == EXIT_FAILURE ? printf("%s\n", ICO_ERR) : printf("%s\n", ICO_DIV);
 	return (ret);
 }
