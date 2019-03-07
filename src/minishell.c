@@ -12,8 +12,6 @@
 
 #include "minishell.h"
 
-char		*g_app;
-
 char		*g_builtin_str[] =
 {
   "exit", "help", "env", "setenv", "cd", "echo", "baguette", "konami"
@@ -42,7 +40,7 @@ static int	read_input(char **line)
 ** Get the line arguments from the user input.
 */
 
-static char	**get_args(char *line)
+static char	**get_args(char *line, char *bin)
 {
 	int		i;
 	int		buff;
@@ -53,7 +51,7 @@ static char	**get_args(char *line)
 	buff = BUFF_SIZE;
 	tokens = (char **)malloc(sizeof(char *));
 	if (!tokens)
-		ft_error(g_app, ERR_MEM);
+		ft_error(bin, ERR_MEM);
 	token = (line ? strtok(line, TOK_DELIM) : NULL);
 	while (token)
 	{
@@ -63,7 +61,7 @@ static char	**get_args(char *line)
 			buff += BUFF_SIZE;
 			tokens = realloc(tokens, buff * sizeof(char *));
 			if (!token)
-				ft_error(g_app, ERR_MEM);
+				ft_error(bin, ERR_MEM);
 		}
 		token = strtok(NULL, TOK_DELIM);
 	}
@@ -75,7 +73,7 @@ static char	**get_args(char *line)
 ** Starts a new process to run a command.
 */
 
-static int	launch_ps(char **args)
+static int	launch_ps(char **args, char *bin)
 {
 	int		ret;
 	int		status;
@@ -90,13 +88,13 @@ static int	launch_ps(char **args)
 	{
 		printf("process doesn't exist\n");
 		if (execvp(args[0], args) == -1)
-			perror(g_app);
+			perror(bin);
 		ret = 0;
 	}
 	else if (pid < 0)
 	{
 		printf("general error\n");
-		perror(g_app);
+		perror(bin);
 	}
 	else
 	{
@@ -119,7 +117,7 @@ static int	run_cmd(char **args)
 
 	i = -1;
 	ret = 1;
-	if (args && args[0])
+	if (args && *args)
 	{
 		while (++i < BLTNS_NUM)
 		{
@@ -136,11 +134,12 @@ static int	run_cmd(char **args)
 ** Shell looping function.
 */
 
-int			minishell(char *opt)
+int			minishell(char *bin, char *opt)
 {
 	int		ret;
 	int		loop;
 	char	*prmpt;
+	// t_sh	sh;
 	char	*line;
 	char	**args;
 
@@ -151,7 +150,7 @@ int			minishell(char *opt)
 	while (loop)
 	{
 		prmpt = (opt && !strcmp(opt, "varela") ? PRMPT_BNS : PRMPT_DFL);
-		printf(CMD_PRMPT(prmpt));
+		printf(CMD_PRMPT(PRMPT_DFL));
 		if ((ret = read_input(&line)) == EXIT_FAILURE)
 			break ;
 		args = get_args(line);
@@ -161,5 +160,6 @@ int			minishell(char *opt)
 		free(args);
 		args = NULL;
 	}
+	ret == EXIT_FAILURE ? printf("WTF?!\n") : printf("Bye!\n");
 	return (ret);
 }
