@@ -18,7 +18,10 @@
 
 int			cmd_echo(char **args)
 {
-	if (*args)
-		printf("%s", (args[1] ? ft_strjoin((args[1]), "\n\0") : "\0"));
+	int		i;
+
+	i = 0;
+	while (args && args[++i])
+		args[i] ? printf("%s\n", args[i]) : putchar('\0');
 	return (1);
 }
