@@ -75,7 +75,7 @@
 #  define GLOBAL_VAR
 
 extern char		*g_builtin_str[];
-extern int		(*g_builtin_func[])(char **);
+extern int		(*g_builtin_func[])(char **args, char *bin);
 
 # endif
 
@@ -83,13 +83,13 @@ extern int		(*g_builtin_func[])(char **);
 ** Function prototypes
 */
 int				builtins_get_total(void);
-int				cmd_exit(char** args);
-int				cmd_help(char** args);
-int				cmd_env(char** args);
-int				cmd_setenv(char** args);
-int				cmd_cd(char** args);
-int				cmd_echo(char** args);
-int				cmd_baguette(char** args);
-int				cmd_konami(char** args);
+int				cmd_exit(char **args, char *bin);
+int				cmd_help(char **args, char *bin);
+int				cmd_env(char **args, char *bin);
+int				cmd_setenv(char **args, char *bin);
+int				cmd_cd(char **args, char *bin);
+int				cmd_echo(char **args, char *bin);
+int				cmd_baguette(char **args, char *bin);
+int				cmd_konami(char **args, char *bin);
 
 #endif

@@ -16,9 +16,9 @@
 ** ...
 */
 
-int			cmd_konami(char **args)
+int			cmd_konami(char **args, char *bin)
 {
-	// (void)args;
+	(void)*bin;
 	printf("%s\n", args[1]);
 	return (1);
 }

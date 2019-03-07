@@ -16,11 +16,12 @@
 ** ...
 */
 
-int			cmd_echo(char **args)
+int			cmd_echo(char **args, char *bin)
 {
 	int		i;
 
 	i = 0;
+	(void)*bin;
 	while (args && args[++i])
 		args[i] ? printf("%s\n", args[i]) : putchar('\0');
 	return (1);

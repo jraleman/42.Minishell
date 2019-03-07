@@ -12,15 +12,26 @@
 
 #include "builtins.h"
 
+// /*
+// ** ...
+// */
+//
+// static void	usage_msg()
+// {
+// 	fprintf(stderr, "usage: cd { path }\n");
+// }
+
 /*
 ** ...
 */
 
-int			cmd_cd(char **args)
+int			cmd_cd(char **args, char *bin)
 {
-	if (!args[1])
-		fprintf(stderr, "%s: expected argument to \"cd\"\n", g_app);
+
+	if (!args[1] && !args[2] && !args[3])
+		fprintf(stderr, "%s: expected argument to \"cd\"\n", bin);
+		// usage_msg();
 	else
-		chdir(args[1]) ? perror(g_app) : 0;
+		chdir(args[1]) ? perror(bin) : 0;
 	return (1);
 }

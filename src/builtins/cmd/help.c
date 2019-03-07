@@ -27,7 +27,7 @@ static void	print_info(void)
 ** ...
 */
 
-int			cmd_help(char **args)
+int			cmd_help(char **args, char *bin)
 {
 	int		i;
 
@@ -35,7 +35,7 @@ int			cmd_help(char **args)
 
 	printf("%s\n", args[0]);
 	i = -1;
-	// (void)**args;
+	(void)*bin;
 	print_info();
 	printf("The following are built in:\n");
 	while (++i < BLTNS_NUM)

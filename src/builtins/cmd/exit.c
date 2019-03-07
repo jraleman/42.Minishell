@@ -16,8 +16,9 @@
 ** ...
 */
 
-int			cmd_exit(char **args)
+int			cmd_exit(char **args, char *bin)
 {
+	(void)*bin;
 	(void)**args;
 	return (EXIT_SUCCESS);
 }
