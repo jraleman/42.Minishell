@@ -56,6 +56,7 @@
 ** Local header files
 */
 # include "utils.h"
+# include "t_sh.h"
 # include "builtins.h"
 
 /*
@@ -67,32 +68,13 @@
 # define PRMPT_BNS			("🐢")
 # define ICON_LINE			("☁️☁️☁️☁️☁️☁️☁️☁️☁️☁️☁️☁️☁️☁️☁️☁️☁️☁️☁️☁️☁️☁️☁️☁️☁️☁️☁️☁️☁️")
 # define ICON_ERRR			("💩")
+# define OPTS_FLGS			("plc-prompt-line-colors")
 # define NUM_PRMPT			(2)
 # define CMD_PRMPT(PRMPT)	("%s  > "), (PRMPT)
-
-typedef struct		s_cmd
-{
-    const char		*name;
-    int				(*fun)(char **, char *);
-}					t_cmd;
-
-/*
-** ...
-*/
-
-typedef struct		s_sh
-{
-	int				div;
-	wchar_t 		*prmpt;
-	wchar_t			*icon;
-	char			*builtin[NUM_BLTNS];
-	// int				*cmd[NUM_BLTNS](char **, char *);
-	t_cmd			*builtin_cmd;
-}					t_sh;
 
 /*
 ** Function prototypes
 */
-int			minishell(char *bin, char *opt);
+int			minishell(char *bin, char *opt[]);
 
 #endif

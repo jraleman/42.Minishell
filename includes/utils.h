@@ -34,5 +34,6 @@
 */
 void			ft_error(char *bin, int err);
 char			*ft_strjoin(char const *s1, char const *s2);
+int				ft_cisin(char *s, char c);
 
 #endif

@@ -14,12 +14,11 @@
 
 char		*g_builtin_str[] =
 {
-  "exit", "help", "env", "setenv", "cd", "echo", "baguette", "konami"
+  "exit", "help", "env", "setenv", "cd", "echo"
 };
 int			(*g_builtin_func[])(char **, char *) =
 {
   &cmd_exit, &cmd_help, &cmd_env, &cmd_setenv, &cmd_echo
-              , &cmd_baguette, &cmd_konami
 };
 
 /*
@@ -86,23 +85,14 @@ static int	launch_ps(char **args, char *bin)
 	pid = fork();
 	if (args && !pid)
 	{
-		printf("process doesn't exist\n");
 		if (execvp(args[0], args) == -1)
-			perror(bin);
-		ret = 0;
+			printf("process doesn't exist\n"), perror(bin), ret = 0;
 	}
 	else if (pid < 0)
-	{
-		printf("general error\n");
-		perror(bin);
-	}
+		printf("general error\n"), perror(bin);
 	else
-	{
-		// ???
-		// wpid = waitpid(pid, &status, WUNTRACED);
 		while (!WIFEXITED(status) && !WIFSIGNALED(status))
 			wpid = waitpid(pid, &status, WUNTRACED);
-	}
 	return (ret);
 }
 
@@ -119,12 +109,12 @@ static int	run_cmd(char **args, char *bin)
 	ret = 1;
 	if (args && *args)
 	{
-		while (++i < BLTNS_NUM)
+		while (++i < builtins_get_total())
 		{
 			if (!strcmp(args[0], (char *)g_builtin_str[i]))
 				break ;
 		}
-		ret = (i < BLTNS_NUM ? ((int)g_builtin_func[i](args, bin)) \
+		ret = (i < builtins_get_total() ? ((int)g_builtin_func[i](args, bin)) \
 				: launch_ps(args, bin));
 	}
 	return (ret);
@@ -134,21 +124,19 @@ static int	run_cmd(char **args, char *bin)
 ** Shell looping function.
 */
 
-int			minishell(char *bin, char *opt)
+int			minishell(char *bin, char *opt[])
 {
 	int		ret;
 	int		loop;
-	char	*prmpt;
-	// t_sh	sh;
 	char	*line;
 	char	**args;
+	t_sh	*sh;
 
 	ret = EXIT_SUCCESS;
 	loop = 1;
 	line = NULL;
-	// t_sh = set_options(t_sh sh, char *opt[])
-	prmpt = (opt && !strcmp(opt, "varela") ? PRMPT_BNS : PRMPT_DFL);
-	while (loop)
+	sh = sh_init(bin, opt, 0);
+	while (loop == 1)
 	{
 		printf(CMD_PRMPT(PRMPT_DFL));
 		if ((ret = read_input(&line)) == EXIT_FAILURE)
