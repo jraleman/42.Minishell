@@ -18,5 +18,5 @@
 
 int			builtins_get_total(void)
 {
-	return (BLTNS_NUM);
+	return (NUM_BLTNS);
 }
