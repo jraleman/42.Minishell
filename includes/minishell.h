@@ -70,11 +70,18 @@
 # define NUM_PRMPT			(2)
 # define CMD_PRMPT(PRMPT)	("%s  > "), (PRMPT)
 
-// typedef struct		s_sh
-// {
-// 	wchar_t 		*prmpts[2];
-//
-// }					t_sh;
+/*
+** ...
+*/
+
+typedef struct		s_sh
+{
+	int				div;
+	wchar_t 		*prmpt;
+	wchar_t			*icon;
+	char			*builtin[NUM_BLTNS];
+	int				*cmd[NUM_BLTNS](char **, char *);
+}					t_sh;
 
 /*
 ** Function prototypes
