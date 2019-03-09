@@ -13,18 +13,18 @@
 NAME		= minishell
 SRC			= src/main.c \
 			  src/minishell.c \
-			  src/builtins/builtins.c \
+			  src/t_sh/sh_init.c \
+			  src/builtins/set_builtins.c \
 			  src/builtins/get_total.c \
-			  src/builtins/cmd/baguette.c \
 			  src/builtins/cmd/cd.c \
 			  src/builtins/cmd/echo.c \
 			  src/builtins/cmd/env.c \
 			  src/builtins/cmd/exit.c \
 			  src/builtins/cmd/help.c \
-			  src/builtins/cmd/konami.c \
 			  src/builtins/cmd/setenv.c \
 			  src/utils/ft_error.c \
-			  src/utils/ft_strjoin.c
+			  src/utils/ft_strjoin.c \
+			  src/utils/ft_cisin.c
 INC			= includes/
 CC			= gcc
 CFLAGS		= -Wall -Werror -Wextra -I $(INC)
