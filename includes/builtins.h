@@ -61,7 +61,7 @@
 ** Defined macros
 */
 # define AUTHOR				("Jose Ramon Aleman")
-# define NUM_BLTNS			(8)
+# define NUM_BLTNS			(6)
 # define CMD_BLTNS(...)		__VA_ARGS__
 
 /*
@@ -88,7 +88,5 @@ int				cmd_env(char **args, char *bin);
 int				cmd_setenv(char **args, char *bin);
 int				cmd_cd(char **args, char *bin);
 int				cmd_echo(char **args, char *bin);
-int				cmd_baguette(char **args, char *bin);
-int				cmd_konami(char **args, char *bin);
 
 #endif
