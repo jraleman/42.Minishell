@@ -31,14 +31,14 @@ int			cmd_help(char **args, char *bin)
 {
 	int		i;
 
-	char	*tmp_bltns[BLTNS_NUM] = {"exit", "help", "env", "setenv", "cd", "echo", "baguette", "konami"};
+	char	*tmp_bltns[NUM_BLTNS] = {"exit", "help", "env", "setenv", "cd", "echo"};
 
 	printf("%s\n", args[0]);
 	i = -1;
 	(void)*bin;
 	print_info();
 	printf("The following are built in:\n");
-	while (++i < BLTNS_NUM)
+	while (++i < builtins_get_total())
 		printf("    %s\n", tmp_bltns[i]);
 	printf("Use the man command for information on other programs.\n");
 	return (1);
