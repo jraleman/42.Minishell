@@ -12,6 +12,18 @@
 
 #include "builtins.h"
 
+
+char		*g_builtin_str[] =
+{
+  "exit", "help", "env", "setenv", "cd", "echo", "baguette", "konami"
+};
+int			(*g_builtin_func[])(char **, char *) =
+{
+  &cmd_exit, &cmd_help, &cmd_env, &cmd_setenv, &cmd_echo
+              , &cmd_baguette, &cmd_konami
+};
+
+
 /*
 ** ...
 */

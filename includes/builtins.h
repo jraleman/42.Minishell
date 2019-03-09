@@ -56,14 +56,13 @@
 ** - Local header files
 */
 # include "utils.h"
-# include "global.h"
 
 /*
 ** Defined macros
 */
 # define AUTHOR				("Jose Ramon Aleman")
-# define BLTNS_NUM			(8)
-# define BLTNS_CMDS(...)	__VA_ARGS__
+# define NUM_BLTNS			(8)
+# define CMD_BLTNS(...)		__VA_ARGS__
 
 /*
 ** Global vars
