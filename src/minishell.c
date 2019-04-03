@@ -13,11 +13,53 @@
 #include "minishell.h"
 
 /*
-**
+** Execute arguments
 */
 
-int		minishell(char *prog_name)
+int			execute_args(char **args, char *prog_name)
 {
-	printf("%s\n", prog_name);
+	(void)args;
+	(void)prog_name;
 	return (0);
+}
+
+/*
+** Parse the line and return the arguments read from the input line.
+*/
+
+char		**get_args(char *line)
+{
+	return ((char **)line);
+}
+
+/*
+** Read a line from standard input or file.
+*/
+
+char		*read_line(void)
+{
+	return (NULL);
+}
+
+/*
+** Minishell
+*/
+
+int			minishell(char *prog_name)
+{
+	int		status;
+	char	*line;
+	char	**args;
+
+	status = 1;
+	while (status)
+	{
+		printf("%s\n", "> ");
+		line = read_line();
+		args = get_args(line);
+		status = execute_args(args, prog_name);
+		free(line);
+		free(args);
+	}
+	return (status);
 }
