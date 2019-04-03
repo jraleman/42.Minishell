@@ -12,7 +12,17 @@
 
 NAME		= minishell
 SRC			= src/main.c \
-              src/minishell.c
+              src/minishell.c \
+			  src/utils/ft_bzero.c \
+			  src/utils/ft_strchr.c \
+			  src/utils/ft_strclr.c \
+			  src/utils/ft_strcpy.c \
+			  src/utils/ft_strdup.c \
+			  src/utils/ft_strlen.c \
+			  src/utils/ft_strncat.c \
+			  src/utils/ft_strnew.c \
+			  src/utils/ft_strsub.c \
+			  src/utils/get_next_line.c
 INC			= includes/
 CC			= gcc
 CFLAGS		= -Wall -Werror -Wextra -I $(INC)
