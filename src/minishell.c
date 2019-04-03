@@ -38,7 +38,11 @@ char		**get_args(char *line)
 
 char		*read_line(void)
 {
-	return (NULL);
+	char	*line;
+
+	line = NULL;
+	get_next_line(0, &line);
+	return (line);
 }
 
 /*
@@ -56,6 +60,7 @@ int			minishell(char *prog_name)
 	{
 		printf("%s\n", "> ");
 		line = read_line();
+		printf("%s\n", line);
 		args = get_args(line);
 		status = execute_args(args, prog_name);
 		free(line);
