@@ -43,7 +43,7 @@ static const unsigned long	g_mask80;
 ** Function prototypes.
 */
 
-int			get_next_line(const int fd, char **line)
+int			get_next_line(const int fd, char **line);
 char		*ft_strcpy(char *dst, const char *src);
 char		*ft_strdup(const char *s1);
 char		*ft_strchr(const char *s, int c);
