@@ -52,29 +52,4 @@
 */
 # include <string.h>
 
-/*
-** Local header files
-*/
-# include "utils.h"
-# include "t_sh.h"
-# include "builtins.h"
-
-/*
-** Defined macros
-*/
-# define BUFF_SIZE			(64)
-# define TOK_DELIM			(" \t\r\n\a")
-# define PRMPT_DFL			("🍍")
-# define PRMPT_BNS			("🐢")
-# define ICON_LINE			("☁️☁️☁️☁️☁️☁️☁️☁️☁️☁️☁️☁️☁️☁️☁️☁️☁️☁️☁️☁️☁️☁️☁️☁️☁️☁️☁️☁️☁️")
-# define ICON_ERRR			("💩")
-# define OPTS_FLGS			("plc-prompt-line-colors")
-# define NUM_PRMPT			(2)
-# define CMD_PRMPT(PRMPT)	("%s  > "), (PRMPT)
-
-/*
-** Function prototypes
-*/
-int			minishell(char *bin, char *opt[]);
-
 #endif
