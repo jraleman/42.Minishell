@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaleman <jaleman@student.42.us.org>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -13,11 +13,11 @@
 #include "minishell.h"
 
 /*
-** Main function.
+**
 */
 
-int			main(int argc, char *argv[])
+int		minishell(char *prog_name)
 {
-	(void)argc;
-	return (minishell(argv[0]));
+	printf("%s\n", prog_name);
+	return (0);
 }

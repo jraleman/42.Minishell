@@ -52,4 +52,10 @@
 */
 # include <string.h>
 
+/*
+** Prototypes...
+*/
+
+int		minishell(char *prog_name);
+
 #endif

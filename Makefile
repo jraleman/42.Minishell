@@ -11,7 +11,8 @@
 # **************************************************************************** #
 
 NAME		= minishell
-SRC			= src/main.c 
+SRC			= src/main.c \
+              src/minishell.c
 INC			= includes/
 CC			= gcc
 CFLAGS		= -Wall -Werror -Wextra -I $(INC)
