@@ -16,7 +16,7 @@
 ** Execute a process
 */
 
-static int	execute_ps(char **args, char *prog_name)
+static int	execute_ps(char **args, char *name)
 {
 	pid_t	pid;
 	pid_t	wpid;
@@ -27,9 +27,7 @@ static int	execute_ps(char **args, char *prog_name)
 	if (pid == 0)
 	{
 		if (execvp(args[0], args) == -1)
-		{
-			printf("%s\n", prog_name);
-		}
+			printf("%s\n", name);
 		exit(1);
 	}
 	else if (pid < 0)
@@ -47,7 +45,7 @@ static int	execute_ps(char **args, char *prog_name)
 ** Run a command
 */
 
-static int	run_cmd(char **args, char *prog_name)
+static int	run_cmd(char **args, char **env, char *name)
 {
 	int		i;
 	char	*blt_str[] = {
@@ -55,7 +53,7 @@ static int	run_cmd(char **args, char *prog_name)
 		"echo",
 		"exit"
 	};
-	int		(*blt_func[])(char **, t_env *, char *) = {
+	int		(*blt_func[])(char **, char **env, char *) = {
 		&cmd_cd,
 		&cmd_echo,
 		&cmd_exit
@@ -66,8 +64,8 @@ static int	run_cmd(char **args, char *prog_name)
 		return (1);
 	while (++i < BLT_NUM)
 		if (strcmp(args[0], blt_str[i]) == 0)
-			return ((*blt_func[i])(args, NULL, prog_name));
-	return (execute_ps(args, prog_name));
+			return ((*blt_func[i])(args, env, name));
+	return (execute_ps(args, name));
 }
 
 /*
@@ -116,7 +114,7 @@ static char	*read_line(void)
 ** Minishell
 */
 
-int			minishell(char *prog_name)
+int			minishell(char **env, char *name)
 {
 	int		status;
 	char	*line;
@@ -128,7 +126,7 @@ int			minishell(char *prog_name)
 		write(1, PRMPT, 3);
 		line = read_line();
 		args = get_args(line);
-		status = run_cmd(args, prog_name);
+		status = run_cmd(args, env, name);
 		free(line);
 		free(args);
 	}

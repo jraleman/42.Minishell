@@ -12,6 +12,8 @@
 
 #include "minishell.h"
 
+extern char **environ;
+
 /*
 ** Main function.
 */
@@ -19,5 +21,5 @@
 int			main(int argc, char *argv[])
 {
 	(void)argc;
-	return (minishell(argv[0]));
+	return (minishell(environ, argv[0]));
 }

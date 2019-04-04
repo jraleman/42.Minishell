@@ -12,9 +12,9 @@
 
 #include "minishell.h"
 
-int		cmd_cd(char **args, t_env *lst, char *name)
+int		cmd_cd(char **args, char **env, char *name)
 {
-	(void)lst;
+	(void)env;
 	(void)name;
 	if (args[1])
 		write(2, "expected arguments\n", 19);
