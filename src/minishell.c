@@ -13,10 +13,10 @@
 #include "minishell.h"
 
 /*
-** Execute arguments
+** Execute a process
 */
 
-static int	execute_args(char **args, char *prog_name)
+static int	execute_ps(char **args, char *prog_name)
 {
 	pid_t	pid;
 	pid_t	wpid;
@@ -41,6 +41,33 @@ static int	execute_args(char **args, char *prog_name)
 			wpid = waitpid(pid, &status, WUNTRACED);
 	}
 	return (1);
+}
+
+/*
+** Run a command
+*/
+
+static int	run_cmd(char **args, char *prog_name)
+{
+	int		i;
+	char	*blt_str[] = {
+		// "cd",
+		"echo",
+		"exit"
+	};
+	int		(*blt_func[])(char **) = {
+		// &cmd_cd,
+		&cmd_echo,
+		&cmd_exit
+	};
+
+	i = -1;
+	if (args[0] == NULL)
+		return (1);
+	while (++i < BLT_NUM)
+		if (strcmp(args[0], blt_str[i]) == 0)
+			return ((*blt_func[i])(args));
+	return (execute_ps(args, prog_name));
 }
 
 /*
@@ -98,13 +125,10 @@ int			minishell(char *prog_name)
 	status = 1;
 	while (status)
 	{
-		// printf("%s", PROMPT);
-		// ft_putwchar(PROMPT);
-		write(1, ">  ", 3);
+		write(1, PRMPT, 3);
 		line = read_line();
 		args = get_args(line);
-		// printf("%s\n", args[1]);
-		status = execute_args(args, prog_name);
+		status = run_cmd(args, prog_name);
 		free(line);
 		free(args);
 	}
