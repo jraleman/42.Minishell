@@ -27,9 +27,32 @@ int			execute_args(char **args, char *prog_name)
 ** Parse the line and return the arguments read from the input line.
 */
 
+# define TOK_DELIM		(" \t\r\n\a")
+# define TOK_BUFF		(8)
+
 char		**get_args(char *line)
 {
-	return ((char **)line);
+	int		i;
+	int		buffer;
+	char	*token;
+	char	**tokens;
+
+	i = 0;
+	buffer = TOK_BUFF;
+	token = strtok(line, TOK_DELIM);
+	tokens = (char **)malloc(sizeof(char *) * buffer);
+	while (token)
+	{
+		tokens[i] = token;
+		if (++i > buffer)
+		{
+			buffer += TOK_BUFF;
+			tokens = (char **)realloc(tokens, buffer * sizeof(char *));
+		}
+		token = strtok(NULL, TOK_DELIM);
+	}
+	tokens[i] = NULL;
+	return (tokens);
 }
 
 /*
@@ -45,6 +68,8 @@ char		*read_line(void)
 	return (line);
 }
 
+# define PROMPT		("🍍  ")
+
 /*
 ** Minishell
 */
@@ -58,10 +83,10 @@ int			minishell(char *prog_name)
 	status = 1;
 	while (status)
 	{
-		printf("%s\n", "> ");
+		printf("%s", PROMPT);
 		line = read_line();
-		printf("%s\n", line);
 		args = get_args(line);
+		// printf("%s\n", args[1]);
 		status = execute_args(args, prog_name);
 		free(line);
 		free(args);
