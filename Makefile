@@ -12,7 +12,9 @@
 
 NAME		= minishell
 SRC			= src/main.c \
-              src/minishell.c \
+			  src/minishell.c \
+			  src/builtins/cmd_echo.c \
+			  src/builtins/cmd_exit.c \
 			  src/utils/ft_bzero.c \
 			  src/utils/ft_strchr.c \
 			  src/utils/ft_strclr.c \

@@ -60,13 +60,16 @@
 
 # define TOK_DELIM		(" \t\r\n\a")
 # define TOK_BUFF		(8)
-# define PROMPT			("🍍")
-# define BLT_NUM		(3)
+# define PROMPT			("🍍 ")
+# define PRMPT			(">  ")
+# define BLT_NUM		(2)
 
 /*
-** Prototypes...
+** Prototypes
 */
 
 int		minishell(char *prog_name);
+int		cmd_exit(char **args);
+int		cmd_echo(char **args);
 
 #endif
