@@ -12,8 +12,10 @@
 
 #include "minishell.h"
 
-int		cmd_exit(char **args)
+int		cmd_exit(char **args, t_env *lst, char *name)
 {
 	(void)args;
+	(void)lst;
+	(void)name;
 	return (0);
 }

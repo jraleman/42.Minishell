@@ -82,8 +82,8 @@ typedef struct		s_env
 */
 
 int					minishell(char *prog_name);
-int					cmd_exit(char **args);
-int					cmd_echo(char **args);
-int					cmd_cd(char **args);
+int					cmd_exit(char **args, t_env *lst, char *name);
+int					cmd_echo(char **args, t_env *lst, char *name);
+int					cmd_cd(char **args, t_env *lst, char *name);
 
 #endif

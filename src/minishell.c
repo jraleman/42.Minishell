@@ -55,7 +55,7 @@ static int	run_cmd(char **args, char *prog_name)
 		"echo",
 		"exit"
 	};
-	int		(*blt_func[])(char **) = {
+	int		(*blt_func[])(char **, t_env *, char *) = {
 		&cmd_cd,
 		&cmd_echo,
 		&cmd_exit
@@ -66,7 +66,7 @@ static int	run_cmd(char **args, char *prog_name)
 		return (1);
 	while (++i < BLT_NUM)
 		if (strcmp(args[0], blt_str[i]) == 0)
-			return ((*blt_func[i])(args));
+			return ((*blt_func[i])(args, NULL, prog_name));
 	return (execute_ps(args, prog_name));
 }
 

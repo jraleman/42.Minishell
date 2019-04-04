@@ -12,11 +12,13 @@
 
 #include "minishell.h"
 
-int		cmd_echo(char **args)
+int		cmd_echo(char **args, t_env *lst, char *name)
 {
 	int	i;
 
 	i = 0;
+	(void)lst;
+	(void)name;
 	while (args && args[++i])
 		args[i] ? printf("%s\n", args[i]) : write(1, "\0", 1);
 	return (1);
