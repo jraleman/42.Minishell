@@ -51,12 +51,12 @@ static int	run_cmd(char **args, char *prog_name)
 {
 	int		i;
 	char	*blt_str[] = {
-		// "cd",
+		"cd",
 		"echo",
 		"exit"
 	};
 	int		(*blt_func[])(char **) = {
-		// &cmd_cd,
+		&cmd_cd,
 		&cmd_echo,
 		&cmd_exit
 	};

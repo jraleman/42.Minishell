@@ -62,7 +62,7 @@
 # define TOK_BUFF		(8)
 # define PROMPT			("🍍 ")
 # define PRMPT			(">  ")
-# define BLT_NUM		(2)
+# define BLT_NUM		(3)
 
 /*
 ** Prototypes
@@ -71,5 +71,6 @@
 int		minishell(char *prog_name);
 int		cmd_exit(char **args);
 int		cmd_echo(char **args);
+int		cmd_cd(char **args);
 
 #endif
