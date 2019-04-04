@@ -55,6 +55,15 @@
 # include <string.h>
 
 /*
+** Macros
+*/
+
+# define TOK_DELIM		(" \t\r\n\a")
+# define TOK_BUFF		(8)
+# define PROMPT			("🍍")
+# define BLT_NUM		(3)
+
+/*
 ** Prototypes...
 */
 
