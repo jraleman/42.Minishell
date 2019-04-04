@@ -18,9 +18,29 @@
 
 int			execute_args(char **args, char *prog_name)
 {
-	(void)args;
-	(void)prog_name;
-	return (0);
+	pid_t	pid;
+	pid_t	wpid;
+	int		status;
+
+	pid = fork();
+	status = 0;
+	if (pid == 0)
+	{
+		if (execvp(args[0], args) == -1)
+		{
+			printf("%s\n", prog_name);
+		}
+		exit(1);
+	}
+	else if (pid < 0)
+	  printf("%s\n", "error");
+	else
+	{
+		wpid = waitpid(pid, &status, WUNTRACED);
+		while (!WIFEXITED(status) && !WIFSIGNALED(status))
+			wpid = waitpid(pid, &status, WUNTRACED);
+	}
+	return (1);
 }
 
 /*
@@ -68,7 +88,7 @@ char		*read_line(void)
 	return (line);
 }
 
-# define PROMPT		("🍍  ")
+# define PROMPT		("🍍")
 
 /*
 ** Minishell
@@ -83,7 +103,9 @@ int			minishell(char *prog_name)
 	status = 1;
 	while (status)
 	{
-		printf("%s", PROMPT);
+		// printf("%s", PROMPT);
+		// ft_putwchar(PROMPT);
+		write(1, ">  ", 3);
 		line = read_line();
 		args = get_args(line);
 		// printf("%s\n", args[1]);
