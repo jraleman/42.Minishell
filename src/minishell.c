@@ -16,7 +16,7 @@
 ** Execute arguments
 */
 
-int			execute_args(char **args, char *prog_name)
+static int	execute_args(char **args, char *prog_name)
 {
 	pid_t	pid;
 	pid_t	wpid;
@@ -47,10 +47,7 @@ int			execute_args(char **args, char *prog_name)
 ** Parse the line and return the arguments read from the input line.
 */
 
-# define TOK_DELIM		(" \t\r\n\a")
-# define TOK_BUFF		(8)
-
-char		**get_args(char *line)
+static char	**get_args(char *line)
 {
 	int		i;
 	int		buffer;
@@ -79,7 +76,7 @@ char		**get_args(char *line)
 ** Read a line from standard input or file.
 */
 
-char		*read_line(void)
+static char	*read_line(void)
 {
 	char	*line;
 
@@ -87,8 +84,6 @@ char		*read_line(void)
 	get_next_line(0, &line);
 	return (line);
 }
-
-# define PROMPT		("🍍")
 
 /*
 ** Minishell
