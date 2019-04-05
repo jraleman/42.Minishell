@@ -14,8 +14,29 @@
 
 int		cmd_unsetenv(char **args, char **env, char *name)
 {
-	(void)args;
-	(void)env;
+	char	**ep;
+	char	*sp;
+	size_t	len;
+
 	(void)name;
+	if (!args[1] || strchr(args[1], '='))
+		puts("Error");
+	else
+	{
+		len = strlen(args[1]);
+		for (ep = env; *ep;)
+		{
+			if (!strncmp(*ep, args[1], len) && (*ep)[len] == '=')
+			{
+				for (sp = *ep; *sp; sp += 1)
+				{
+					*sp = *(sp + 1);
+					printf("%s\n", sp);
+				}
+			}
+			else
+				ep += 1;
+		}
+	}
 	return (1);
 }
