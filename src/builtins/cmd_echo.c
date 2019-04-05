@@ -20,6 +20,7 @@ int		cmd_echo(char **args, char **env, char *name)
 	(void)env;
 	(void)name;
 	while (args && args[++i])
-		args[i] ? printf("%s\n", args[i]) : write(1, "\0", 1);
+		args[i] ? printf("%s ", args[i]) : write(1, "\0", 1);
+	write(1, "\n", 1);;
 	return (1);
 }

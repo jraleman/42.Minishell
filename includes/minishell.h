@@ -70,12 +70,12 @@
 
 extern char			**environ;
 
-typedef struct		s_env
-{
-	char			*name;
-	char			*value;
-	struct s_env	*next;
-}					t_env;
+// typedef struct		s_env
+// {
+// 	char			*name;
+// 	char			*value;
+// 	struct s_env	*next;
+// }					t_env;
 
 /*
 ** Prototypes
@@ -85,5 +85,6 @@ int					minishell(char **env, char *name);
 int					cmd_exit(char **args, char **env, char *name);
 int					cmd_echo(char **args, char **env, char *name);
 int					cmd_cd(char **args, char **env, char *name);
+int					cmd_env(char **args, char **env, char *name);
 
 #endif
