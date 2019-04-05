@@ -62,7 +62,7 @@
 # define TOK_BUFF	(8)
 # define PROMPT		("🍍 ")
 # define PRMPT		(">  ")
-# define BLT_NUM	(3)
+# define BLT_NUM	(6)
 
 /*
 ** Enviroment structure
@@ -86,5 +86,7 @@ int					cmd_exit(char **args, char **env, char *name);
 int					cmd_echo(char **args, char **env, char *name);
 int					cmd_cd(char **args, char **env, char *name);
 int					cmd_env(char **args, char **env, char *name);
+int					cmd_setenv(char **args, char **env, char *name);
+int					cmd_unsetenv(char **args, char **env, char *name);
 
 #endif

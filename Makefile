@@ -16,6 +16,9 @@ SRC			= src/main.c \
 			  src/builtins/cmd_cd.c \
 			  src/builtins/cmd_echo.c \
 			  src/builtins/cmd_exit.c \
+			  src/builtins/cmd_env.c \
+			  src/builtins/cmd_setenv.c \
+			  src/builtins/cmd_unsetenv.c \
 			  src/utils/ft_bzero.c \
 			  src/utils/ft_strchr.c \
 			  src/utils/ft_strclr.c \

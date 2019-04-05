@@ -51,12 +51,18 @@ static int	run_cmd(char **args, char **env, char *name)
 	char	*blt_str[] = {
 		"cd",
 		"echo",
-		"exit"
+		"exit",
+		"env",
+		"setenv",
+		"unsetenv"
 	};
 	int		(*blt_func[])(char **, char **env, char *) = {
 		&cmd_cd,
 		&cmd_echo,
-		&cmd_exit
+		&cmd_exit,
+		&cmd_env,
+		&cmd_setenv,
+		&cmd_unsetenv
 	};
 
 	i = -1;
