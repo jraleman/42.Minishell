@@ -129,7 +129,7 @@ int			minishell(char **env, char *name)
 	status = 1;
 	while (status)
 	{
-		write(1, PRMPT, 3);
+		write(1, PRMPT, strlen(PRMPT));
 		line = read_line();
 		args = get_args(line);
 		status = run_cmd(args, env, name);
