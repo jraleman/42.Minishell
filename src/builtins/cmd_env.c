@@ -18,8 +18,8 @@ int		cmd_env(char **args, char **env, char *name)
 
 	(void)args;
 	(void)name;
-	i = 0;
-	while (env[i] != NULL)
+	i = -1;
+	while (env[++i] != NULL)
 		printf("%s\n", env[i]);
 	return (1);
 }
