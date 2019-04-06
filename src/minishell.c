@@ -13,68 +13,6 @@
 #include "minishell.h"
 
 /*
-** Execute a process
-*/
-
-static int	execute_ps(char **args, char *name)
-{
-	pid_t	pid;
-	pid_t	wpid;
-	int		status;
-
-	pid = fork();
-	status = 0;
-	if (pid == 0)
-	{
-		if (execvp(args[0], args) == -1)
-			printf("%s\n", name);
-		exit(1);
-	}
-	else if (pid < 0)
-	  printf("%s\n", "error");
-	else
-	{
-		wpid = waitpid(pid, &status, WUNTRACED);
-		while (!WIFEXITED(status) && !WIFSIGNALED(status))
-			wpid = waitpid(pid, &status, WUNTRACED);
-	}
-	return (1);
-}
-
-/*
-** Run a command
-*/
-
-static int	run_cmd(char **args, char **env, char *name)
-{
-	int		i;
-	char	*blt_str[] = {
-		"cd",
-		"echo",
-		"exit",
-		"env",
-		"setenv",
-		"unsetenv"
-	};
-	int		(*blt_func[])(char **, char **env, char *) = {
-		&cmd_cd,
-		&cmd_echo,
-		&cmd_exit,
-		&cmd_env,
-		&cmd_setenv,
-		&cmd_unsetenv
-	};
-
-	i = -1;
-	if (args[0] == NULL)
-		return (1);
-	while (++i < BLT_NUM)
-		if (strcmp(args[0], blt_str[i]) == 0)
-			return ((*blt_func[i])(args, env, name));
-	return (execute_ps(args, name));
-}
-
-/*
 ** Parse the line and return the arguments read from the input line.
 */
 
@@ -129,7 +67,7 @@ int			minishell(char **env, char *name)
 	status = 1;
 	while (status)
 	{
-		write(1, PRMPT, strlen(PRMPT));
+		write(1, PROMPT, strlen(PROMPT));
 		line = read_line();
 		args = get_args(line);
 		status = run_cmd(args, env, name);

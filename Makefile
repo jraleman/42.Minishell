@@ -13,6 +13,7 @@
 NAME		= minishell
 SRC			= src/main.c \
 			  src/minishell.c \
+			  src/run_cmd.c \
 			  src/builtins/cmd_cd.c \
 			  src/builtins/cmd_echo.c \
 			  src/builtins/cmd_exit.c \

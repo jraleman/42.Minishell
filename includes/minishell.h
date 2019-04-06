@@ -58,35 +58,22 @@
 ** Macros
 */
 
+# define BLT_NUM	(6)
 # define TOK_DELIM	(" \t\r\n\a")
 # define TOK_BUFF	(8)
-# define PROMPT		("🍍 ")
-# define PRMPT		(">  ")
-# define BLT_NUM	(6)
-
-/*
-** Enviroment structure
-*/
-
-extern char			**environ;
-
-// typedef struct		s_env
-// {
-// 	char			*name;
-// 	char			*value;
-// 	struct s_env	*next;
-// }					t_env;
+# define PROMPT		(">  ")
 
 /*
 ** Prototypes
 */
 
-int					minishell(char **env, char *name);
-int					cmd_exit(char **args, char **env, char *name);
-int					cmd_echo(char **args, char **env, char *name);
-int					cmd_cd(char **args, char **env, char *name);
-int					cmd_env(char **args, char **env, char *name);
-int					cmd_setenv(char **args, char **env, char *name);
-int					cmd_unsetenv(char **args, char **env, char *name);
+int				minishell(char **env, char *name);
+int				run_cmd(char **args, char **env, char *name);
+int				cmd_exit(char **args, char **env, char *name);
+int				cmd_echo(char **args, char **env, char *name);
+int				cmd_cd(char **args, char **env, char *name);
+int				cmd_env(char **args, char **env, char *name);
+int				cmd_setenv(char **args, char **env, char *name);
+int				cmd_unsetenv(char **args, char **env, char *name);
 
 #endif

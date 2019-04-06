@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-int		cmd_unsetenv(char **args, char **env, char *name)
+int			cmd_unsetenv(char **args, char **env, char *name)
 {
 	char	**ep;
 	char	*sp;
@@ -31,7 +31,8 @@ int		cmd_unsetenv(char **args, char **env, char *name)
 				for (sp = *ep; *sp; sp += 1)
 				{
 					*sp = *(sp + 1);
-					printf("%s\n", sp);
+					// printf("%s\n", sp);
+					// *sp = *sp++;
 				}
 			}
 			else

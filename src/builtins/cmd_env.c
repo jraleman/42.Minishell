@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-int		cmd_env(char **args, char **env, char *name)
+int			cmd_env(char **args, char **env, char *name)
 {
 	int		i;
 
