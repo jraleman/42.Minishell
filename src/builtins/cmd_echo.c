@@ -14,20 +14,23 @@
 
 char		*get_eval(char **env, char *arg)
 {
+	int		i;
 	char	*eval;
 
-	eval = "Eval";
+	i = 0;
+	eval = NULL;
+	while (env && env[++i])
+		if (!strncmp(env[i], (arg + 1), strlen(arg) - 1))
+			eval = strrchr(env[i], '=') + 1;
 	return (eval);
-	(void)env;
-	(void)arg;
 }
 
 char		*echo_arg(char **env, char *arg, int last)
 {
 	char	*str;
 
-	str = ((arg && arg[0] == '$') ? get_eval(env, arg) : arg);
-	write(1, str, strlen(str));
+	if ((str = ((arg && arg[0] == '$') ? get_eval(env, arg) : arg)))
+		write(1, str, strlen(str));
 	write(1, (!last ? " \n" : "\n"), (!last ? 2 : 1));
 	return (str);
 }
