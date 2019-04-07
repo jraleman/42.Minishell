@@ -12,14 +12,13 @@
 
 #include "minishell.h"
 
-extern char **environ;
-
 /*
 ** Main function.
+** Use third argument instead of -> extern char **environ;
 */
 
-int			main(int argc, char *argv[])
+int			main(int argc, char *argv[], char *envp[])
 {
 	(void)argc;
-	return (minishell(environ, argv[0]));
+	return (minishell(envp, argv[0]));
 }
