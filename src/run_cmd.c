@@ -13,35 +13,6 @@
 #include "minishell.h"
 
 /*
-** Execute a process
-*/
-
-static int	execute_ps(char **args, char *name)
-{
-	pid_t	pid;
-	pid_t	wpid;
-	int		status;
-
-	pid = fork();
-	status = 0;
-	if (pid == 0)
-	{
-		if (execvp(args[0], args) == -1)
-			printf("%s\n", name);
-		exit(1);
-	}
-	else if (pid < 0)
-		printf("%s\n", "error");
-	else
-	{
-		wpid = waitpid(pid, &status, WUNTRACED);
-		while (!WIFEXITED(status) && !WIFSIGNALED(status))
-			wpid = waitpid(pid, &status, WUNTRACED);
-	}
-	return (1);
-}
-
-/*
 ** Builtin commands name
 */
 
@@ -76,6 +47,35 @@ static int	(*blt_func(int i))(char **args, char **env, char *name)
 }
 
 /*
+** Execute a process
+*/
+
+static int	execute_ps(char **args, char **env, char *name)
+{
+	pid_t	pid;
+	pid_t	wpid;
+	int		status;
+
+	pid = fork();
+	status = 0;
+	if (pid == 0)
+	{
+		if (execve(args[0], args, env) == -1)
+			printf("%s\n", name);
+		exit(1);
+	}
+	else if (pid < 0)
+		printf("%s\n", "error");
+	else
+	{
+		wpid = waitpid(pid, &status, WUNTRACED);
+		while (!WIFEXITED(status) && !WIFSIGNALED(status))
+			wpid = waitpid(pid, &status, WUNTRACED);
+	}
+	return (1);
+}
+
+/*
 ** Run a command
 */
 
@@ -89,5 +89,5 @@ int			run_cmd(char **args, char **env, char *name)
 	while (++i < BLT_NUM)
 		if (strcmp(args[0], blt_str(i)) == 0)
 			return ((*blt_func(i))(args, env, name));
-	return (execute_ps(args, name));
+	return (execute_ps(args, env, name));
 }
