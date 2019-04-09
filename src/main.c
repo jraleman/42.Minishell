@@ -13,17 +13,6 @@
 #include "minishell.h"
 
 /*
-** Prints a welcome message
-*/
-
-static void		print_welcome(char *path, char *name)
-{
-	printf("%s\n", path);
-	printf("%s\n", name);
-	return ;
-}
-
-/*
 ** Return the number of entries in a table
 */
 
@@ -38,6 +27,27 @@ static size_t	tablen(char **tab)
 }
 
 /*
+** Initialize a double pointer array to store the enviromental variables.
+*/
+
+static char		**init_env(char *envp[], char *path)
+{
+	char		**env;
+	int			i;
+	int			len;
+
+	i = -1;
+	len = tablen(envp);
+	if (!(env = (char **)malloc(sizeof(char *) * len + 1)))
+		return (NULL);
+	while (++i < len)
+		env[i] = envp[i];
+	env[i] = path;
+	env[i + 1] = NULL;
+	return (env);
+}
+
+/*
 ** Main function.
 ** Use third argument instead of -> extern char **environ;
 */
@@ -46,7 +56,7 @@ int			main(int argc, char *argv[], char *envp[], char *apple[])
 {
 	char	**env;
 
-	print_welcome(apple[0], argv[0]);
+	env = init_env(envp, apple[0]);
 	return (minishell(env, argv[0]));
 	(void)argc;
 }
