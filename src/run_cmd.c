@@ -18,7 +18,7 @@
 
 static char	*blt_str(int i)
 {
-	char	*blt_str[BLT_NUM];
+	char	*blt_str[BLT_NUM + 1];
 
 	blt_str[0] = "cd";
 	blt_str[1] = "echo";
@@ -26,6 +26,7 @@ static char	*blt_str(int i)
 	blt_str[3] = "env";
 	blt_str[4] = "setenv";
 	blt_str[5] = "unsetenv";
+	blt_str[6] = NULL;
 	return (blt_str[i]);
 }
 
@@ -53,25 +54,30 @@ static int	(*blt_func(int i))(char **args, char **env, char *name)
 static int	execute_ps(char **args, char **env, char *name)
 {
 	pid_t	pid;
-	pid_t	wpid;
-	int		status;
 
 	pid = fork();
-	status = 0;
 	if (pid == 0)
 	{
+		printf("%s\n\n", args[0]);
+		for (size_t i = 0; args[i]; i++) {
+			printf("%s\n", args[i]);
+		}
+		printf("%s\n\n", "ENV!");
+		for (size_t i = 0; env[i]; i++) {
+			printf("%s\n", env[i]);
+		}
 		if (execve(args[0], args, env) == -1)
-			printf("%s\n", name);
+		{
+			(void)name;
+			perror("execve() failed");
+		}
+
 		exit(1);
 	}
 	else if (pid < 0)
 		printf("%s\n", "error");
 	else
-	{
-		wpid = waitpid(pid, &status, WUNTRACED);
-		while (!WIFEXITED(status) && !WIFSIGNALED(status))
-			wpid = waitpid(pid, &status, WUNTRACED);
-	}
+		wait(&pid);
 	return (1);
 }
 
@@ -82,6 +88,7 @@ static int	execute_ps(char **args, char **env, char *name)
 int			run_cmd(char **args, char **env, char *name)
 {
 	int		i;
+	char	*tmp;
 
 	i = -1;
 	if (args[0] == NULL)
@@ -89,5 +96,9 @@ int			run_cmd(char **args, char **env, char *name)
 	while (++i < BLT_NUM)
 		if (strcmp(args[0], blt_str(i)) == 0)
 			return ((*blt_func(i))(args, env, name));
+	tmp = strdup("/bin/");
+	strcat(tmp, args[0]);
+	strncpy(args[0], tmp, strlen(tmp));
+	free(tmp);
 	return (execute_ps(args, env, name));
 }

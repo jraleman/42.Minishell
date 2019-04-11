@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-char		*get_eval(char **env, char *arg)
+static char	*get_eval(char **env, char *arg)
 {
 	int		i;
 	char	*eval;
@@ -25,7 +25,7 @@ char		*get_eval(char **env, char *arg)
 	return (eval);
 }
 
-char		*echo_arg(char **env, char *arg, int last)
+static char	*echo_arg(char **env, char *arg, int last)
 {
 	char	*str;
 

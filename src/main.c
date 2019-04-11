@@ -41,8 +41,8 @@ static char		**init_env(char *envp[], char *path)
 	if (!(env = (char **)malloc(sizeof(char *) * len + 1)))
 		return (NULL);
 	while (++i < len)
-		env[i] = envp[i];
-	env[i] = path;
+		env[i] = strdup(envp[i]);
+	env[i] = strdup(path);
 	env[i + 1] = NULL;
 	return (env);
 }
@@ -52,11 +52,11 @@ static char		**init_env(char *envp[], char *path)
 ** Use third argument instead of -> extern char **environ;
 */
 
-int			main(int argc, char *argv[], char *envp[], char *apple[])
+int			main(int argc, char *argv[], char **envp, char *apple[])
 {
 	char	**env;
 
 	env = init_env(envp, apple[0]);
-	return (minishell(env, argv[0]));
+	return (minishell(envp, argv[0]));
 	(void)argc;
 }
