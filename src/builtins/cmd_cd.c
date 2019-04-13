@@ -12,18 +12,12 @@
 
 #include "minishell.h"
 
-int			cmd_cd(char **args, char **env, char *name)
+int			cmd_cd(char **args, char **env)
 {
 	int		i;
 
-	(void)name;
 	i = -1;
-	if (!args[1])
-	{
-		write(2, "expected arguments\n", 19);
-		return (-1);
-	}
-	if (args[1][0] == '~' && !args[1][1])
+	if (!args[1] || (args[1][0] == '~' && !args[1][1]))
 	{
 		while (env[++i])
 			if (!strncmp(env[i], "HOME", 4))

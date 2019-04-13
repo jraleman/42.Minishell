@@ -69,11 +69,11 @@
 
 int				minishell(char **env, char *name);
 int				run_cmd(char **args, char **env, char *name);
-int				cmd_exit(char **args, char **env, char *name);
-int				cmd_echo(char **args, char **env, char *name);
-int				cmd_cd(char **args, char **env, char *name);
-int				cmd_env(char **args, char **env, char *name);
-int				cmd_setenv(char **args, char **env, char *name);
-int				cmd_unsetenv(char **args, char **env, char *name);
+int				cmd_exit(char **args, char **env);
+int				cmd_echo(char **args, char **env);
+int				cmd_cd(char **args, char **env);
+int				cmd_env(char **args, char **env);
+int				cmd_setenv(char **args, char **env);
+int				cmd_unsetenv(char **args, char **env);
 
 #endif

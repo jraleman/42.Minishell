@@ -12,12 +12,11 @@
 
 #include "minishell.h"
 
-int			cmd_env(char **args, char **env, char *name)
+int			cmd_env(char **args, char **env)
 {
 	int		i;
 
 	(void)args;
-	(void)name;
 	i = -1;
 	while (env[++i] != NULL)
 		printf("%s\n", env[i]);

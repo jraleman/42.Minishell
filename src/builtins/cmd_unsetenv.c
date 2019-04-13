@@ -12,13 +12,12 @@
 
 #include "minishell.h"
 
-int			cmd_unsetenv(char **args, char **env, char *name)
+int			cmd_unsetenv(char **args, char **env)
 {
 	char	**ep;
 	char	*sp;
 	size_t	len;
 
-	(void)name;
 	if (!args[1] || strchr(args[1], '='))
 		puts("Error");
 	else

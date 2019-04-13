@@ -31,11 +31,11 @@ static char	*echo_arg(char **env, char *arg, int last)
 
 	if ((str = ((arg && arg[0] == '$') ? get_eval(env, arg) : arg)))
 		write(1, str, strlen(str));
-	write(1, (!last ? " \n" : "\n"), (!last ? 2 : 1));
+	write(1, (!last ? " " : "\n"), 1);
 	return (str);
 }
 
-int			cmd_echo(char **args, char **env, char *name)
+int			cmd_echo(char **args, char **env)
 {
 	int		i;
 
@@ -44,5 +44,4 @@ int			cmd_echo(char **args, char **env, char *name)
 		while (args[++i])
 			echo_arg(env, args[i], (args[i + 1] ? 1 : 0));
 	return (1);
-	(void)name;
 }

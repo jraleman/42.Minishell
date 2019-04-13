@@ -39,11 +39,10 @@ static int	cmd_putenv(char *entry, char **env)
 	return (1);
 }
 
-int			cmd_setenv(char **args, char **env, char *name)
+int			cmd_setenv(char **args, char **env)
 {
 	char	*es;
 
-	(void)name;
 	if (!args[1] || strchr(args[1], '=') || !args[2])
 	{
 		puts("Error");

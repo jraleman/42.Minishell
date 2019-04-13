@@ -34,9 +34,9 @@ static char	*blt_str(int i)
 ** Builtin commands function
 */
 
-static int	(*blt_func(int i))(char **args, char **env, char *name)
+static int	(*blt_func(int i))(char **args, char **env)
 {
-	int		(*blt_func[BLT_NUM])(char **args, char **env, char *name);
+	int		(*blt_func[BLT_NUM])(char **args, char **env);
 
 	blt_func[0] = &cmd_cd;
 	blt_func[1] = &cmd_echo;
@@ -80,7 +80,7 @@ int			run_cmd(char **args, char **env, char *name)
 		return (1);
 	while (++i < BLT_NUM)
 		if (strcmp(args[0], blt_str(i)) == 0)
-			return ((*blt_func(i))(args, env, name));
+			return ((*blt_func(i))(args, env));
 	tmp = strdup("/bin/");
 	strcat(tmp, args[0]);
 	strncpy(args[0], tmp, strlen(tmp));
