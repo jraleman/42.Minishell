@@ -53,6 +53,7 @@ char		*ft_strnew(size_t size);
 char		*ft_strsub(char const *s, unsigned int start, size_t len);
 void		ft_bzero(void *s, size_t n);
 void		ft_strclr(char *s);
+void		ft_error(int err, char *exe, char *msg);
 size_t		ft_strlen(const char *s);
 
 #endif

@@ -57,25 +57,10 @@ static int	execute_ps(char **args, char **env, char *name)
 
 	pid = fork();
 	if (pid == 0)
-	{
-		printf("%s\n\n", args[0]);
-		for (size_t i = 0; args[i]; i++) {
-			printf("%s\n", args[i]);
-		}
-		printf("%s\n\n", "ENV!");
-		for (size_t i = 0; env[i]; i++) {
-			printf("%s\n", env[i]);
-		}
-		if (execve(args[0], args, env) == -1)
-		{
-			(void)name;
-			perror("execve() failed");
-		}
-
-		exit(1);
-	}
+		execve(args[0], args, env) == -1 \
+			? ft_error(1, name, "permission denied") : 0;
 	else if (pid < 0)
-		printf("%s\n", "error");
+		ft_error(1, name, "failed to fork");
 	else
 		wait(&pid);
 	return (1);

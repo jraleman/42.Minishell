@@ -29,6 +29,7 @@ SRC			= src/main.c \
 			  src/utils/ft_strncat.c \
 			  src/utils/ft_strnew.c \
 			  src/utils/ft_strsub.c \
+			  src/utils/ft_error.c \
 			  src/utils/get_next_line.c
 INC			= includes/
 CC			= gcc
