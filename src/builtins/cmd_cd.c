@@ -29,7 +29,7 @@ char		**cmd_cd(char **args, char **env, char *name)
 					break ;
 	}
 	else if (chdir(args[1]) != 0)
-		write(2, "err\n", 4);
+		ft_putendl("There was an error...");
 	return (env);
 	(void)name;
 }

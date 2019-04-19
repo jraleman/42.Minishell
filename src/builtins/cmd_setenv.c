@@ -13,7 +13,7 @@
 #include "minishell.h"
 
 /*
-** ...
+** Replace an env variable.
 */
 
 static char	**replace(char **args, char **env)
@@ -36,7 +36,7 @@ static char	**replace(char **args, char **env)
 }
 
 /*
-** ...
+** Create a new env variable
 */
 
 static char	**create_new(char **args, char **env)
@@ -63,7 +63,7 @@ static char	**create_new(char **args, char **env)
 }
 
 /*
-** ...
+** Free env var passed argument.
 */
 
 static void	free_arg(char **arg)
@@ -71,10 +71,11 @@ static void	free_arg(char **arg)
 	free(arg[1]);
 	free(arg[2]);
 	free(arg);
+	return ;
 }
 
 /*
-** ...
+** Set variable for only one argument.
 */
 
 static char	**one_arg(char **args, char **env, char *name)

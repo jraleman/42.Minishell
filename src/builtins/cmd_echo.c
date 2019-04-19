@@ -39,7 +39,7 @@ static char	*echo_arg(char **env, char *arg, int last)
 
 	if ((str = ((arg && arg[0] == '$') ? get_eval(env, arg) : arg)))
 		ft_putstr(str);
-	write(1, !last ? "" : "\n", 1);
+	ft_putchar(!last ? ' ' : '\n');
 	return (str);
 }
 
@@ -54,7 +54,7 @@ char		**cmd_echo(char **args, char **env, char *name)
 	i = 0;
 	if (*args && args[1])
 		while (args[++i])
-			echo_arg(env, args[i], (args[i + 1] ? 1 : 0));
+			echo_arg(env, args[i], (args[i + 1] ? 0 : 1));
 	return (env);
 	(void)name;
 }
