@@ -3,77 +3,61 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaleman <jaleman@student.42.us.org>        +#+  +:+       +#+        */
+/*   By: jaleman <jaleman@student.us.org>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/25 10:22:32 by jaleman           #+#    #+#             */
-/*   Updated: 2019/02/25 10:22:33 by jaleman          ###   ########.fr       */
+/*   Created: 2017/05/14 17:01:52 by jaleman           #+#    #+#             */
+/*   Updated: 2017/05/14 17:01:56 by jaleman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# include <limits.h>
+# include <crt_externs.h>
+# include <sys/stat.h>
+# include <sys/wait.h>
+# include <readline/readline.h>
+# include <readline/history.h>
+
 # include "utils.h"
 
-/*
-** - waitpid()
-** - associated macros
-*/
-# include <sys/wait.h>
-
-/*
-** - chdir()
-** - fork()
-** - exec()
-** - pid_t
-*/
 # include <unistd.h>
-
-/*
-** - malloc()
-** - realloc()
-** - free()
-** - exit()
-** - execvp()
-** - EXIT_SUCCESS, EXIT_FAILURE
-*/
 # include <stdlib.h>
-
-/*
-** - fprintf()
-** - printf()
-** - stderr
-** - getchar()
-** - perror()
-*/
 # include <stdio.h>
 
-/*
-** strcmp()
-** strtok()
-*/
-# include <string.h>
+# define YEL	"\x1B[33m"
+# define RESET	"\x1B[0m"
+# define BOLD	"\e[1m"
+# define SPACES " \t\n\r\a\""
+# define NOTEXIST "cd: no such file or directory: %s\n"
+# define NOTDIR "cd: not a directory: %s\n"
+# define NOPERM "cd: permission denied: %s\n"
+# define NOPWD "cd: string not in pwd: %s\n"
+
+# define BLT_NUM	(9)
 
 /*
-** Macros
+** Main functions
 */
 
-# define BLT_NUM	(6)
-# define TOK_DELIM	(" \t\r\n\a")
-# define TOK_BUFF	(8)
-# define PROMPT		(">  ")
+int		minishell(char **env, char *name);
+char	**execute(char **args, char **env);
+char	*blt_str(int i);
+char	**(*blt_func(int i))(char **args, char **env);
 
 /*
-** Prototypes
+** Builtins
 */
 
-int				minishell(char **env, char *name);
-int				run_cmd(char **args, char **env, char *name);
-int				cmd_exit(char **args, char **env);
-int				cmd_echo(char **args, char **env);
-int				cmd_cd(char **args, char **env);
-int				cmd_env(char **args, char **env);
-int				cmd_setenv(char **args, char **env);
-int				cmd_unsetenv(char **args, char **env);
+char	**cmd_echo(char **args, char **env);
+char	**cmd_cd(char **args, char **env);
+char	**cmd_setenv(char **args, char **env);
+char	**cmd_unsetenv(char **args, char **env);
+char	**cmd_env(char **args, char **env);
+char	**cmd_exit(char **args, char **env);
+char	**cmd_pwd(char **args, char **env);
+char	**cmd_help(char **args, char **env);
+char	**cmd_yoshi(char **args, char **env);
 
 #endif
