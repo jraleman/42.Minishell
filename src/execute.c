@@ -48,12 +48,12 @@ static void	check_error(char *p, char *arg, char *name)
 	if (slash > 0 && !p)
 	{
 		ft_putstr(name);
-		ft_putendl(": No such file or directory");
+		ft_putendl(": no such file or directory");
 	}
 	else if (!p)
 	{
 		ft_putstr(name);
-		ft_putendl(": Command not found");
+		ft_putendl(": command not found");
 	}
 	return ;
 }

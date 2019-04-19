@@ -57,13 +57,11 @@ static char	**run_cmd(char **comands, char **env, char *name)
 
 static void	set_dir(char **env, char *name)
 {
-	char	*dir;
 	char	**arg;
 
-	dir = "PWD";
 	arg = (char **)ft_memalloc(sizeof(char *) * 4);
 	arg[0] = NULL;
-	arg[1] = ft_strdup(dir);
+	arg[1] = ft_strdup("PWD");
 	arg[2] = ft_strnew(PATH_MAX);
 	arg[3] = 0;
 	getcwd(arg[2], PATH_MAX);
