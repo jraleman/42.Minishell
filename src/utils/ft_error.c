@@ -11,10 +11,13 @@
 /* ************************************************************************** */
 
 #include "utils.h"
-#include <stdio.h>
 
 void	ft_error(int err, char *exe, char *msg)
 {
-	printf("%s: %s\n", exe, msg);
+	// printf("%s: %s\n", exe, msg);
+	write(1, exe, ft_strlen(exe));
+	write(1, ": ", 2);
+	write(1, msg, ft_strlen(msg));
+	write(1, "\n", 1);
 	return (exit(err));
 }

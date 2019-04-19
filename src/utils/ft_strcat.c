@@ -1,23 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_strcat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaleman <jaleman@student.42.us.org>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/27 12:05:40 by jaleman           #+#    #+#             */
-/*   Updated: 2017/02/27 12:05:41 by jaleman          ###   ########.fr       */
+/*   Created: 2017/02/27 16:28:59 by jaleman           #+#    #+#             */
+/*   Updated: 2017/02/27 16:29:02 by jaleman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
-int		ft_strlen(const char *s)
+char	*ft_strcat(char *s1, const char *s2)
 {
 	int i;
+	int k;
 
 	i = 0;
-	while (s[i] != '\0')
+	k = 0;
+	while (s1[i] != '\0')
 		i++;
-	return (i);
+	while (s2[k] != '\0')
+	{
+		s1[i + k] = s2[k];
+		k++;
+	}
+	s1[i + k] = '\0';
+	return (s1);
 }

@@ -3,85 +3,55 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaleman <jaleman@student.42.us.org>        +#+  +:+       +#+        */
+/*   By: jaleman <jaleman@student.42.us.org>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/26 07:11:51 by jaleman           #+#    #+#             */
-/*   Updated: 2016/11/26 07:11:52 by jaleman          ###   ########.fr       */
+/*   Created: 2017/03/20 13:44:35 by jaleman           #+#    #+#             */
+/*   Updated: 2017/03/20 13:44:37 by jaleman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
-static char	*re_alloc(char *str, size_t size)
+static int	ft_read(const int fd, char **s)
 {
-	char	*p;
-	size_t	i;
+	char	buf[BUFF_SIZE + 1];
+	char	*tmp;
+	int		i;
 
-	p = NULL;
-	i = 0;
-	if (str)
+	if ((i = read(fd, buf, BUFF_SIZE)) > 0)
 	{
-		p = (char *)malloc(sizeof(char) * (size));
-		if (!p)
-			return (NULL);
-		ft_bzero(p, size);
-		ft_strcpy(p, str);
-		free(str);
-		str = NULL;
+		buf[i] = '\0';
+		tmp = *s;
+		*s = ft_strjoin(tmp, buf);
+		free(tmp);
 	}
-	return (p);
-}
-
-static char	*ft_strrsub(char *s, size_t len)
-{
-	char			*p;
-	size_t			i;
-	size_t			start;
-
-	i = 0;
-	if (!s)
-		return (NULL);
-	p = (char *)malloc(sizeof(char) * len + 1);
-	if (!p)
-		return (NULL);
-	start = ft_strlen(s) - len;
-	while (i < len)
-	{
-		p[i] = s[i + start];
-		i++;
-	}
-	p[i] = '\0';
-	ft_strclr(s);
-	free(s);
-	s = NULL;
-	return (p);
+	return (i);
 }
 
 int			get_next_line(const int fd, char **line)
 {
-	char		buf[BUFF_SIZE + 1];
-	char		*tmp;
-	static char *save;
-	int			ret;
+	static char	*s[4864];
+	char		*end_s;
+	int			k;
 
-	if (fd < 0 || line == NULL || read(fd, buf, 0) < 0)
+	if (fd < 0 || fd > 2048 - 1 || line == NULL)
 		return (-1);
-	if (!save)
-		save = ft_strnew(BUFF_SIZE + 1);
-	ft_bzero(buf, BUFF_SIZE + 1);
-	while (!ft_strchr(buf, '\n') && (ret = read(fd, buf, BUFF_SIZE)))
+	if (!s[fd])
+		s[fd] = ft_strnew(1);
+	while ((end_s = ft_strchr(s[fd], '\n')) == NULL)
 	{
-		save = re_alloc(save, ft_strlen(save) + ret + 1);
-		save = ft_strncat(save, buf, ret);
+		if ((k = ft_read(fd, &s[fd])) < 0)
+			return (-1);
+		if (k == 0 && !end_s)
+		{
+			if (s[fd][0] == '\0')
+				return (0);
+			*line = s[fd];
+			s[fd] = NULL;
+			return (1);
+		}
 	}
-	if ((tmp = ft_strchr(save, '\n')))
-	{
-		*line = ft_strsub(save, 0, ft_strlen(save) - ft_strlen(tmp));
-		save = ft_strrsub(save, ft_strlen(&tmp[1]));
-		return (1);
-	}
-	*line = ft_strdup(save);
-	ret = (save[0] ? 1 : 0);
-	ft_strclr(save);
-	return (ret == 0 ? 0 : 1);
+	*line = ft_strsub(s[fd], 0, end_s - s[fd]);
+	s[fd] = ft_strdup(end_s + 1);
+	return (1);
 }

@@ -3,35 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsub.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaleman <jaleman@student.42.us.org>        +#+  +:+       +#+        */
+/*   By: jaleman <jaleman@student.42.us.org>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/03 15:18:33 by jaleman           #+#    #+#             */
-/*   Updated: 2016/11/03 15:18:34 by jaleman          ###   ########.fr       */
+/*   Created: 2017/03/02 15:45:41 by jaleman           #+#    #+#             */
+/*   Updated: 2017/03/02 15:45:45 by jaleman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
-/*
-** Allocates with malloc(), and returns a “fresh” substring from the string
-** given as argument. The substring begins at indexstart and is of size len.
-** If start and len aren’t refering to a valid substring, the behavior is
-** undefined. If the allocation fails, the function returns NULL.
-*/
-
 char	*ft_strsub(char const *s, unsigned int start, size_t len)
 {
-	char			*strsub;
-	unsigned int	i;
+	size_t	i;
+	char	*str;
 
 	i = 0;
-	if (!s || !(strsub = (char *)malloc(sizeof(char) * len + 1)))
+	if (!s)
 		return (NULL);
-	while (i < len)
+	str = (char*)ft_memalloc(sizeof(char) * len + 1);
+	if (str == NULL)
+		return (NULL);
+	while (len-- > 0 && s[i] != '\0')
 	{
-		strsub[i] = s[i + start];
-		i += 1;
+		str[i] = s[start];
+		start++;
+		i++;
 	}
-	strsub[i] = '\0';
-	return (strsub);
+	str[i] = '\0';
+	return (str);
 }

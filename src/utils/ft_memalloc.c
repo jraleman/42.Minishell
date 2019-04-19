@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_memalloc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaleman <jaleman@student.42.us.org>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/27 12:05:40 by jaleman           #+#    #+#             */
-/*   Updated: 2017/02/27 12:05:41 by jaleman          ###   ########.fr       */
+/*   Created: 2017/03/01 17:02:24 by jaleman           #+#    #+#             */
+/*   Updated: 2017/03/01 17:02:26 by jaleman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
-int		ft_strlen(const char *s)
+void	*ft_memalloc(size_t size)
 {
-	int i;
+	unsigned char *mem;
 
-	i = 0;
-	while (s[i] != '\0')
-		i++;
-	return (i);
+	mem = (unsigned char*)malloc(sizeof(size_t) * size);
+	if (mem == NULL)
+		return (NULL);
+	ft_bzero(mem, size);
+	return (mem);
 }
