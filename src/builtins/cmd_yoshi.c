@@ -14,7 +14,7 @@
 
 // https://github.com/markotikvic/cowsay/blob/master/main.c
 
-char	**cmd_yoshisay(char **env)
+char	**cmd_yoshi(char **env)
 {
 	// free_env(env);
 	return (env);
