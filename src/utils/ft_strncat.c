@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   strncat.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaleman <jaleman@student.42.us.org>                     +#+  +:+       +#+        */
+/*   By: jaleman <jaleman@student.42.us.org>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 17:49:00 by jaleman           #+#    #+#             */
 /*   Updated: 2017/02/27 17:49:02 by jaleman          ###   ########.fr       */

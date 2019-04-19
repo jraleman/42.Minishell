@@ -12,6 +12,9 @@
 
 #include "minishell.h"
 
+/*
+** Builtin cd command implementation.
+*/
 
 char		**cmd_cd(char **args, char **env)
 {

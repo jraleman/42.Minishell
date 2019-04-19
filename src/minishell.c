@@ -13,7 +13,7 @@
 #include "minishell.h"
 
 /*
-** Read a line from standard input or file.
+** Read the line from standard input.
 */
 
 static char	*read_line(void)
@@ -26,7 +26,7 @@ static char	*read_line(void)
 }
 
 /*
-** ...
+** Run a command or builtin command.
 */
 
 static char	**run_cmd(char **comands, char **env, char *name)
@@ -55,24 +55,31 @@ static char	**run_cmd(char **comands, char **env, char *name)
 }
 
 /*
-** ...
+** Set the path working directory.
 */
 
-static void	set_dir(char **env, char *dirname)
+static void	set_dir(char **env)
 {
-	char **a;
+	char	*dir;
+	char	**arg;
 
-	a = (char**)ft_memalloc(sizeof(char*) * 4);
-	a[0] = NULL;
-	a[1] = ft_strdup(dirname);
-	a[2] = ft_strnew(PATH_MAX);
-	getcwd(a[2], PATH_MAX);
-	a[3] = 0;
-	cmd_setenv(a, env);
-	free(a[1]);
-	free(a[2]);
-	free(a);
+	dir = "PWD";
+	arg = (char**)ft_memalloc(sizeof(char *) * 4);
+	arg[0] = NULL;
+	arg[1] = ft_strdup(dir);
+	arg[2] = ft_strnew(PATH_MAX);
+	arg[3] = 0;
+	getcwd(arg[2], PATH_MAX);
+	cmd_setenv(arg, env);
+	free(arg[1]);
+	free(arg[2]);
+	free(arg);
+	return ;
 }
+
+/*
+** Minishell looping func
+*/
 
 int			minishell(char **env, char *name)
 {
@@ -83,8 +90,8 @@ int			minishell(char **env, char *name)
 	status = 1;
 	while (status)
 	{
-		write(1, "> ", 2);
-		set_dir(env, "PWD");
+		ft_putstr("> ");
+		set_dir(env);
 		line = read_line();
 		comands = ft_strtok(line, ";");
 		env = run_cmd(comands, env, name);

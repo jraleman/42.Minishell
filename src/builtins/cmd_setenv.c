@@ -12,6 +12,10 @@
 
 #include "minishell.h"
 
+/*
+** ...
+*/
+
 static char	**replace(char **args, char **env)
 {
 	int i;
@@ -30,6 +34,10 @@ static char	**replace(char **args, char **env)
 	ft_strcat(env[i], args[2]);
 	return (env);
 }
+
+/*
+** ...
+*/
 
 static char	**create_new(char **args, char **env)
 {
@@ -54,12 +62,20 @@ static char	**create_new(char **args, char **env)
 	return (*e);
 }
 
+/*
+** ...
+*/
+
 static void	free_ar(char **a)
 {
 	free(a[1]);
 	free(a[2]);
 	free(a);
 }
+
+/*
+** ...
+*/
 
 static char	**one_arg(char **args, char **env)
 {
@@ -87,6 +103,10 @@ static char	**one_arg(char **args, char **env)
 	free_ar(a);
 	return (env);
 }
+
+/*
+** ...
+*/
 
 char		**cmd_setenv(char **args, char **env)
 {

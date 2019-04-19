@@ -12,6 +12,10 @@
 
 #include "minishell.h"
 
+/*
+** Init enviromental variables table.
+*/
+
 static void	init_env(char ***env, char **envp)
 {
 	int		i;
@@ -34,6 +38,10 @@ static void	init_env(char ***env, char **envp)
 	i = -1;
 	return ;
 }
+
+/*
+** Main function.
+*/
 
 int			main(int argc, char *argv[], char *envp[], char *apple[])
 {

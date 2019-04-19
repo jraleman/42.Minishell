@@ -1,17 +1,28 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cmd_env.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jaleman <jaleman@student.us.org>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/05/17 17:08:34 by jaleman           #+#    #+#             */
+/*   Updated: 2017/05/17 17:08:36 by jaleman          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-char	**cmd_env(char **args, char **env)
-{
-	int i;
+/*
+** ...
+*/
 
-	i = 0;
-	while (env[i])
-	{
-		write(1, env[i], ft_strlen(env[i]));
-		write(1, "\n", 1);
-		i += 1;
-	}
-		// ft_printf("%s\n", env[i++]);
+char		**cmd_env(char **args, char **env)
+{
+	int		i;
+
+	i = -1;
+	while (env[++i])
+		ft_putendl(env[i]);
 	return (env);
 	(void)args;
 }

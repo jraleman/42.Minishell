@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execution.c                                        :+:      :+:    :+:   */
+/*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaleman <jaleman@student.us.org>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -13,7 +13,7 @@
 #include "minishell.h"
 
 /*
-** ...
+** Execute process.
 */
 
 static int	execute_ps(char *ex, char **args, char **env, char *name)
@@ -32,7 +32,7 @@ static int	execute_ps(char *ex, char **args, char **env, char *name)
 }
 
 /*
-** ...
+** Check for command error.
 */
 
 static void	check_error(char *p, char *arg)
@@ -53,7 +53,7 @@ static void	check_error(char *p, char *arg)
 }
 
 /*
-** ...
+** Find a command.
 */
 
 static void	find_cmd(char **args, char **env)
@@ -86,7 +86,7 @@ static void	find_cmd(char **args, char **env)
 }
 
 /*
-** ...
+** Execute a command.
 */
 
 char		**execute(char **args, char **env)

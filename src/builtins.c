@@ -1,7 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   builtins.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jaleman <jaleman@student.us.org>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/05/17 17:08:34 by jaleman           #+#    #+#             */
+/*   Updated: 2017/05/17 17:08:36 by jaleman          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 /*
-** Builtin commands name
+** Builtin commands names.
 */
 
 char		*blt_str(int i)
@@ -22,7 +34,7 @@ char		*blt_str(int i)
 }
 
 /*
-** Builtin commands function
+** Builtin commands functions.
 */
 
 char		**(*blt_func(int i))(char **args, char **env)

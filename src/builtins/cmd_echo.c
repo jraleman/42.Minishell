@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo_cmd.c                                         :+:      :+:    :+:   */
+/*   cmd_echo.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaleman <jaleman@student.us.org>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,83 +12,48 @@
 
 #include "minishell.h"
 
-static int	check_env(char *args, int k, char **env)
-{
-	char *s;
+/*
+** Get the enviroment variable content.
+*/
 
-	(ft_find_env(args, env)[0] != 0) ? s = ft_find_env(args, env) : 0;
-	if (ft_find_env(args, env)[0] == 0)
-		return (-1);
-	// ft_printf("%s", s);
-	write(1, s, ft_strlen(s));
-	while (args[k])
-		k++;
-	return (k);
-}
-
-static int	check_arg(char **s, int j, char **env)
-{
-	int			k;
-
-	k = 0;
-	while (s[j][k])
-	{
-		if (s[j][k] == '"' || s[j][k] == '\'' || s[j][k] == '\\')
-			k++;
-		if (!s[j][k])
-			break ;
-		if ((s[j][k] == '$' || s[j][k] == '~') &&
-			(k = check_env(s[j], k, env)) == -1)
-			return (-1);
-		else
-			(s[j][k] ? write(1, &s[j][k], 1) : 0);
-		k++;
-	}
-	return (0);
-}
-
-int			read_args(char **args, int j, char **env)
-{
-	while (args[j])
-	{
-		if (check_arg(args, j, env) == -1)
-			return (-1);
-		(args[++j]) ? write(1, " ", 1) : 0;
-	}
-	return (0);
-}
-
-int			check_str(char **args, int j, char **env)
-{
-	char *s;
-
-	s = NULL;
-	if (args[j][0])
-	{
-		if (read_args(args, j, env) == -1)
-			return (-1);
-	}
-	return (0);
-}
-
-char		**cmd_echo(char **a, char **env)
+static char	*get_eval(char **env, char *arg)
 {
 	int		i;
-	int		j;
-	int		new_line;
+	char	*eval;
 
-	i = 1;
-	j = 0;
-	if (!a[1] || !a[1][0])
-	{
-		// ft_printf("\n");
-		write(1, "\n", 1);
-		return (env);
-	}
-	new_line = (!ft_strncmp("-n", a[++j], PATH_MAX)) ? 1 : 0;
-	(new_line) ? j++ : 0;
-	check_str(a, j, env);
-	// (new_line) ? 0 : ft_printf("\n");
-	new_line ? 0 : write(1, "\n", 1);
+	i = 0;
+	eval = NULL;
+	while (env && env[++i])
+		if (!ft_strncmp(env[i], (arg + 1), ft_strlen(arg) - 1))
+			eval = ft_strrchr(env[i], '=') + 1;
+	return (eval);
+}
+
+/*
+** Print (echo) a passed argument.
+*/
+
+static char	*echo_arg(char **env, char *arg, int last)
+{
+	char	*str;
+
+	if ((str = ((arg && arg[0] == '$') ? get_eval(env, arg) : arg)))
+		ft_putstr(str);
+	write(1, !last ? "" : "\n", 1);
+	return (str);
+}
+
+/*
+** Builtin echo command implementation.
+*/
+
+char		**cmd_echo(char **args, char **env)
+{
+	int		i;
+
+	i = 0;
+	if (*args && args[1])
+		while (args[++i])
+			echo_arg(env, args[i], (args[i + 1] ? 1 : 0));
 	return (env);
 }
