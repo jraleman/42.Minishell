@@ -3,43 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaleman <jaleman@student.42.us.org>        +#+  +:+       +#+        */
+/*   By: jaleman <jaleman@student.us.org>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/25 10:22:32 by jaleman           #+#    #+#             */
-/*   Updated: 2019/02/25 10:22:33 by jaleman          ###   ########.fr       */
+/*   Created: 2017/05/14 16:53:58 by jaleman           #+#    #+#             */
+/*   Updated: 2017/05/14 16:53:59 by jaleman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-/*
-** Parse the line and return the arguments read from the input line.
-*/
-
-static char	**get_args(char *line)
-{
-	int		i;
-	int		buffer;
-	char	*token;
-	char	**tokens;
-
-	i = 0;
-	buffer = TOK_BUFF;
-	token = strtok(line, TOK_DELIM);
-	tokens = (char **)malloc(sizeof(char *) * buffer);
-	while (token)
-	{
-		tokens[i] = token;
-		if (++i > buffer)
-		{
-			buffer += TOK_BUFF;
-			tokens = (char **)realloc(tokens, buffer * sizeof(char *));
-		}
-		token = strtok(NULL, TOK_DELIM);
-	}
-	tokens[i] = NULL;
-	return (tokens);
-}
 
 /*
 ** Read a line from standard input or file.
@@ -55,24 +26,71 @@ static char	*read_line(void)
 }
 
 /*
-** Minishell
+** ...
 */
+
+static char	**run_cmd(char **comands, char **env, char *name)
+{
+	char	**args;
+	int		i;
+	int		j;
+
+	(void)name;
+
+	i = 0;
+	j = 0;
+	while (comands[j])
+	{
+		args = ft_strtok(comands[j], SPACES);
+		env = execute(args, env);
+		free(comands[j]);
+		j += 1;
+		while (args[i])
+			free(args[i++]);
+		(args) ? free(args) : 0;
+		if (!env)
+			return (NULL);
+	}
+	return (env);
+}
+
+/*
+** ...
+*/
+
+static void	set_dir(char **env, char *dirname)
+{
+	char **a;
+
+	a = (char**)ft_memalloc(sizeof(char*) * 4);
+	a[0] = NULL;
+	a[1] = ft_strdup(dirname);
+	a[2] = ft_strnew(PATH_MAX);
+	getcwd(a[2], PATH_MAX);
+	a[3] = 0;
+	cmd_setenv(a, env);
+	free(a[1]);
+	free(a[2]);
+	free(a);
+}
 
 int			minishell(char **env, char *name)
 {
-	int		status;
+	int 	status;
 	char	*line;
-	char	**args;
+	char	**comands;
 
 	status = 1;
 	while (status)
 	{
-		write(1, PROMPT, strlen(PROMPT));
+		write(1, "> ", 2);
+		set_dir(env, "PWD");
 		line = read_line();
-		args = get_args(line);
-		status = run_cmd(args, env, name);
+		comands = ft_strtok(line, ";");
+		env = run_cmd(comands, env, name);
+		status = env ? 1 : 0;
+		free(comands);
 		free(line);
-		free(args);
 	}
 	return (status);
 }

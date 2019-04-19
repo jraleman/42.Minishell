@@ -3,60 +3,44 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaleman <jaleman@student.42.us.org>        +#+  +:+       +#+        */
+/*   By: jaleman <jaleman@student.us.org>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/25 10:22:32 by jaleman           #+#    #+#             */
-/*   Updated: 2019/02/25 10:22:33 by jaleman          ###   ########.fr       */
+/*   Created: 2017/05/14 16:53:58 by jaleman           #+#    #+#             */
+/*   Updated: 2017/05/14 16:53:59 by jaleman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*
-** Return the number of entries in a table
-*/
-
-static size_t	tablen(char **tab)
+static void	init_env(char ***env, char **envp)
 {
-	int			len;
-
-	len  = 0;
-	while(tab[len] != NULL)
-		len += 1;
-	return (len);
-}
-
-/*
-** Initialize a double pointer array to store the enviromental variables.
-*/
-
-static char		**init_env(char *envp[], char *path)
-{
-	char		**env;
-	int			i;
-	int			len;
+	int		i;
+	int		j;
 
 	i = -1;
-	len = tablen(envp);
-	if (!(env = (char **)malloc(sizeof(char *) * len + 1)))
-		return (NULL);
-	while (++i < len)
-		env[i] = strdup(envp[i]);
-	env[i] = strdup(path);
-	env[i + 1] = NULL;
-	return (env);
+	while (envp[++i])
+		NULL;
+	(*env) = (char**)ft_memalloc(sizeof(char*) * i);
+	i = -1;
+	while (envp[++i])
+	{
+		(*env)[i] = (char*)ft_memalloc(PATH_MAX + 1);
+		j = -1;
+		while (envp[i][++j])
+			(*env)[i][j] = envp[i][j];
+		(*env)[i][j] = 0;
+	}
+	(*env)[i] = NULL;
+	i = -1;
+	return ;
 }
 
-/*
-** Main function.
-** Use third argument instead of -> extern char **environ;
-*/
-
-int			main(int argc, char *argv[], char **envp, char *apple[])
+int			main(int argc, char *argv[], char *envp[], char *apple[])
 {
 	char	**env;
 
-	env = init_env(envp, apple[0]);
-	return (minishell(envp, argv[0]));
+	init_env(&env, envp);
+	return (minishell(env, argv[0]));
 	(void)argc;
+	(void)apple;
 }
