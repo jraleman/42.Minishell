@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_setenv.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaleman <jaleman@student.us.org>           +#+  +:+       +#+        */
+/*   By: jaleman <jaleman@student.42.us.org>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/18 23:17:09 by jaleman           #+#    #+#             */
 /*   Updated: 2017/05/18 23:17:11 by jaleman          ###   ########.fr       */

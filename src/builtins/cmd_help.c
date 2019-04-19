@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_help.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaleman <jaleman@student.us.org>           +#+  +:+       +#+        */
+/*   By: jaleman <jaleman@student.42.us.org>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/17 17:08:34 by jaleman           #+#    #+#             */
 /*   Updated: 2017/05/17 17:08:36 by jaleman          ###   ########.fr       */

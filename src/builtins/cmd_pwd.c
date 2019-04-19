@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_pwd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaleman <jaleman@student.us.org>           +#+  +:+       +#+        */
+/*   By: jaleman <jaleman@student.42.us.org>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/22 19:10:30 by jaleman           #+#    #+#             */
 /*   Updated: 2017/05/22 19:10:31 by jaleman          ###   ########.fr       */

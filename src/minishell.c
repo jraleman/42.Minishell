@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaleman <jaleman@student.us.org>           +#+  +:+       +#+        */
+/*   By: jaleman <jaleman@student.42.us.org>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/14 16:53:58 by jaleman           #+#    #+#             */
 /*   Updated: 2017/05/14 16:53:59 by jaleman          ###   ########.fr       */
@@ -39,7 +39,7 @@ static char	**run_cmd(char **comands, char **env, char *name)
 	j = 0;
 	while (comands[j])
 	{
-		args = ft_strtok(comands[j], SPACES);
+		args = ft_strtok(comands[j], TOK_DELIM);
 		env = execute(args, env, name);
 		free(comands[j]);
 		j += 1;

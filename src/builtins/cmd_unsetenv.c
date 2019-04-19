@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_unsetenv.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaleman <jaleman@student.us.org>           +#+  +:+       +#+        */
+/*   By: jaleman <jaleman@student.42.us.org>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/19 16:41:33 by jaleman           #+#    #+#             */
 /*   Updated: 2017/05/19 16:41:35 by jaleman          ###   ########.fr       */
