@@ -12,7 +12,8 @@
 
 #include "minishell.h"
 
-int			cmd_cd(char **args, char **env)
+
+char		**cmd_cd(char **args, char **env)
 {
 	int		i;
 
@@ -20,11 +21,11 @@ int			cmd_cd(char **args, char **env)
 	if (!args[1] || (args[1][0] == '~' && !args[1][1]))
 	{
 		while (env[++i])
-			if (!strncmp(env[i], "HOME", 4))
-				if (chdir(strrchr(env[i], '=') + 1) == 0)
+			if (!ft_strncmp(env[i], "HOME", 4))
+				if (chdir(ft_strrchr(env[i], '=') + 1) == 0)
 					break ;
 	}
 	else if (chdir(args[1]) != 0)
 		write(2, "err\n", 4);
-	return (1);
+	return (env);
 }

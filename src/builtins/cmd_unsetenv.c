@@ -1,42 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd_unsetenv.c                                     :+:      :+:    :+:   */
+/*   unsetenv_cmd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaleman <jaleman@student.42.us.org>        +#+  +:+       +#+        */
+/*   By: jaleman <jaleman@student.us.org>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/25 10:22:32 by jaleman           #+#    #+#             */
-/*   Updated: 2019/02/25 10:22:33 by jaleman          ###   ########.fr       */
+/*   Created: 2017/05/19 16:41:33 by jaleman           #+#    #+#             */
+/*   Updated: 2017/05/19 16:41:35 by jaleman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int			cmd_unsetenv(char **args, char **env)
+char	**cmd_unsetenv(char **args, char **env)
 {
-	char	**ep;
-	char	*sp;
-	size_t	len;
+	int i;
+	int len;
 
-	if (!args[1] || strchr(args[1], '='))
-		puts("Error");
-	else
+	i = -1;
+	len = ft_strlen(args[1]);
+	(args[1]) ? (args[1] += (args[1][0] == '$')) : 0;
+	if (args[1] && ft_find_env(args[1], env)[0] != 0)
 	{
-		len = strlen(args[1]);
-		for (ep = env; *ep;)
+		while (env[++i])
 		{
-			if (!strncmp(*ep, args[1], len) && (*ep)[len] == '=')
-			{
-				for (sp = *ep; *sp; sp += 1)
-				{
-					*sp = *(sp + 1);
-					// printf("%s\n", sp);
-					// *sp = *sp++;
-				}
-			}
-			else
-				ep += 1;
+			if (!ft_strncmp(env[i], args[1], len) && env[i][len] == '=')
+				break ;
 		}
+		free(env[i]);
+		i--;
+		while (env[++i])
+			env[i] = env[i + 1];
+		env[i] = NULL;
 	}
-	return (1);
+	return (env);
 }

@@ -12,9 +12,10 @@
 
 #include "minishell.h"
 
-char	**cmd_exit(char **args, char **env)
+// https://github.com/markotikvic/cowsay/blob/master/main.c
+
+char	**cmd_yoshisay(char **env)
 {
-	ft_tabfree(env);
-	return (NULL);
-	(void)args;
+	// free_env(env);
+	return (env);
 }

@@ -12,9 +12,9 @@
 
 #include "minishell.h"
 
-char	**cmd_exit(char **args, char **env)
+char	**cmd_help(char **args, char **env)
 {
-	ft_tabfree(env);
-	return (NULL);
+	write(1, "HELP\n", 5);
+	return (env);
 	(void)args;
 }

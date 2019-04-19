@@ -3,55 +3,98 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_setenv.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaleman <jaleman@student.42.us.org>        +#+  +:+       +#+        */
+/*   By: jaleman <jaleman@student.us.org>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/25 10:22:32 by jaleman           #+#    #+#             */
-/*   Updated: 2019/02/25 10:22:33 by jaleman          ###   ########.fr       */
+/*   Created: 2017/05/18 23:17:09 by jaleman           #+#    #+#             */
+/*   Updated: 2017/05/18 23:17:11 by jaleman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	cmd_putenv(char *entry, char **env)
+static char	**replace(char **args, char **env)
 {
-	char	*tmp;
-	char	**p;
-	char	**new_env;
-	size_t	len;
-	size_t	size;
+	int i;
+	int len;
 
-	tmp = strchr(entry, '=');
-	len = (size_t)(tmp - entry + 1);
-	for (p = env; *p; p += 1)
+	i = -1;
+	len = ft_strlen(args[1]);
+	while (env[++i])
 	{
-		if (!strncmp(entry, *p, len))
-		{
-			*p = entry;
-			return (1);
-		}
+		if (!ft_strncmp(env[i], args[1], len) && env[i][len] == '=')
+			break ;
 	}
-	size = p - env;
-	new_env = (char **)malloc((sizeof(char *) * size + 2));
-	memcpy((char *)new_env, (char *)env, (sizeof(char *)) * size);
-	new_env[size] = entry;
-	new_env[size + 1] = NULL;
-	env = new_env;
-	return (1);
+	ft_strclr(env[i]);
+	ft_strcat(env[i], args[1]);
+	ft_strcat(env[i], "=");
+	ft_strcat(env[i], args[2]);
+	return (env);
 }
 
-int			cmd_setenv(char **args, char **env)
+static char	**create_new(char **args, char **env)
 {
-	char	*es;
+	char	***e;
+	char	**envp;
+	int		i;
 
-	if (!args[1] || strchr(args[1], '=') || !args[2])
+	i = -1;
+	e = &env;
+	while ((*e)[++i])
+		NULL;
+	envp = (char**)ft_memalloc(sizeof(char*) * (i + 1));
+	i = -1;
+	while ((*e)[++i])
+		envp[i] = ft_strdup((*e)[i]);
+	ft_tabfree(env);
+	envp[i] = (char*)ft_memalloc(PATH_MAX + 1);
+	ft_strncat(envp[i], args[1], ft_strlen(args[1]));
+	ft_strncat(envp[i], "=", 1);
+	ft_strncat(envp[i], args[2], ft_strlen(args[2]));
+	e = &envp;
+	return (*e);
+}
+
+static void	free_ar(char **a)
+{
+	free(a[1]);
+	free(a[2]);
+	free(a);
+}
+
+static char	**one_arg(char **args, char **env)
+{
+	int		i;
+	int		j;
+	char	**a;
+
+	i = (args[1][0] == '"');
+	j = 0;
+	a = (char**)ft_memalloc(sizeof(char*) * 3);
+	a[0] = NULL;
+	a[1] = ft_strnew(sizeof(args[1]));
+	a[2] = ft_strnew(sizeof(args[1]));
+	while (args[1][i] != '=' && args[1][i])
+		a[1][j++] = args[1][i++];
+	if (!args[1][i])
 	{
-		puts("Error");
-		return (-1);
+		free(a);
+		return (env);
 	}
-	cmd_unsetenv(args, env, name);
-	es = (char *)malloc(strlen(args[1]) + 1 + strlen(args[2]) + 1);
-	strcpy(es, args[1]);
-	strcat(es, "=");
-	strcat(es, args[2]);
-	return (cmd_putenv(es, env) != 1 ? -1 : 1);
+	j = 0;
+	while (args[1][++i] != '"' && args[1][i])
+		a[2][j++] = args[1][i];
+	env = cmd_setenv(a, env);
+	free_ar(a);
+	return (env);
+}
+
+char		**cmd_setenv(char **args, char **env)
+{
+	if (!args[1])
+		return (env);
+	if (!args[2])
+		return (one_arg(args, env));
+	if (ft_find_env(args[1], env)[0] != 0)
+		return (replace(args, env));
+	return (create_new(args, env));
 }
