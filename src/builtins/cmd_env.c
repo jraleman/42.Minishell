@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd_env.c                                         :+:      :+:    :+:   */
+/*   cmd_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaleman <jaleman@student.us.org>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -16,7 +16,7 @@
 ** ...
 */
 
-char		**cmd_env(char **args, char **env)
+char		**cmd_env(char **args, char **env, char *name)
 {
 	int		i;
 
@@ -25,4 +25,5 @@ char		**cmd_env(char **args, char **env)
 		ft_putendl(env[i]);
 	return (env);
 	(void)args;
+	(void)name;
 }

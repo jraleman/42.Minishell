@@ -42,22 +42,22 @@
 */
 
 int		minishell(char **env, char *name);
-char	**execute(char **args, char **env);
+char	**execute(char **args, char **env, char *name);
 char	*blt_str(int i);
-char	**(*blt_func(int i))(char **args, char **env);
+char	**(*blt_func(int i))(char **args, char **env, char *name);
 
 /*
 ** Builtins
 */
 
-char	**cmd_echo(char **args, char **env);
-char	**cmd_cd(char **args, char **env);
-char	**cmd_setenv(char **args, char **env);
-char	**cmd_unsetenv(char **args, char **env);
-char	**cmd_env(char **args, char **env);
-char	**cmd_exit(char **args, char **env);
-char	**cmd_pwd(char **args, char **env);
-char	**cmd_help(char **args, char **env);
-char	**cmd_yoshi(char **args, char **env);
+char	**cmd_echo(char **args, char **env, char *name);
+char	**cmd_cd(char **args, char **env, char *name);
+char	**cmd_setenv(char **args, char **env, char *name);
+char	**cmd_unsetenv(char **args, char **env, char *name);
+char	**cmd_env(char **args, char **env, char *name);
+char	**cmd_exit(char **args, char **env, char *name);
+char	**cmd_pwd(char **args, char **env, char *name);
+char	**cmd_help(char **args, char **env, char *name);
+char	**cmd_yoshi(char **args, char **env, char *name);
 
 #endif

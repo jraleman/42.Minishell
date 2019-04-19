@@ -16,9 +16,10 @@
 ** ...
 */
 
-char		**cmd_exit(char **args, char **env)
+char		**cmd_exit(char **args, char **env, char *name)
 {
 	ft_tabfree(env);
 	return (NULL);
 	(void)args;
+	(void)name;
 }

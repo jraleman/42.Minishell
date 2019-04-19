@@ -16,9 +16,10 @@
 ** ...
 */
 
-char	**cmd_help(char **args, char **env)
+char	**cmd_help(char **args, char **env, char *name)
 {
 	write(1, "HELP\n", 5);
 	return (env);
 	(void)args;
+	(void)name;
 }

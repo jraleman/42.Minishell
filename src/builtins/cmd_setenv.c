@@ -77,7 +77,7 @@ static void	free_ar(char **a)
 ** ...
 */
 
-static char	**one_arg(char **args, char **env)
+static char	**one_arg(char **args, char **env, char *name)
 {
 	int		i;
 	int		j;
@@ -99,7 +99,7 @@ static char	**one_arg(char **args, char **env)
 	j = 0;
 	while (args[1][++i] != '"' && args[1][i])
 		a[2][j++] = args[1][i];
-	env = cmd_setenv(a, env);
+	env = cmd_setenv(a, env, name);
 	free_ar(a);
 	return (env);
 }
@@ -108,13 +108,14 @@ static char	**one_arg(char **args, char **env)
 ** ...
 */
 
-char		**cmd_setenv(char **args, char **env)
+char		**cmd_setenv(char **args, char **env, char *name)
 {
 	if (!args[1])
 		return (env);
 	if (!args[2])
-		return (one_arg(args, env));
+		return (one_arg(args, env, name));
 	if (ft_find_env(args[1], env)[0] != 0)
 		return (replace(args, env));
 	return (create_new(args, env));
+	(void)name;
 }

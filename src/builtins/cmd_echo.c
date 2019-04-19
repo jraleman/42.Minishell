@@ -47,7 +47,7 @@ static char	*echo_arg(char **env, char *arg, int last)
 ** Builtin echo command implementation.
 */
 
-char		**cmd_echo(char **args, char **env)
+char		**cmd_echo(char **args, char **env, char *name)
 {
 	int		i;
 
@@ -56,4 +56,5 @@ char		**cmd_echo(char **args, char **env)
 		while (args[++i])
 			echo_arg(env, args[i], (args[i + 1] ? 1 : 0));
 	return (env);
+	(void)name;
 }

@@ -37,9 +37,9 @@ char		*blt_str(int i)
 ** Builtin commands functions.
 */
 
-char		**(*blt_func(int i))(char **args, char **env)
+char		**(*blt_func(int i))(char **args, char **env, char *name)
 {
-	char	**(*blt_func[BLT_NUM])(char **args, char **env);
+	char	**(*blt_func[BLT_NUM])(char **args, char **env, char *name);
 
 	blt_func[0] = &cmd_cd;
 	blt_func[1] = &cmd_echo;

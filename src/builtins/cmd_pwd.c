@@ -16,7 +16,7 @@
 ** ...
 */
 
-char	**cmd_pwd(char **args, char **env)
+char	**cmd_pwd(char **args, char **env, char *name)
 {
 	char	buf[PATH_MAX + 1];
 	int		i;
@@ -29,4 +29,5 @@ char	**cmd_pwd(char **args, char **env)
 	(i == 1) ? write(1, getcwd(buf, PATH_MAX), ft_strlen(getcwd(buf, PATH_MAX))) : 0;
 	write(1, "\n", 1);
 	return (env);
+	(void)name;
 }

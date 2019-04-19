@@ -16,7 +16,7 @@
 ** Builtin cd command implementation.
 */
 
-char		**cmd_cd(char **args, char **env)
+char		**cmd_cd(char **args, char **env, char *name)
 {
 	int		i;
 
@@ -31,4 +31,5 @@ char		**cmd_cd(char **args, char **env)
 	else if (chdir(args[1]) != 0)
 		write(2, "err\n", 4);
 	return (env);
+	(void)name;
 }

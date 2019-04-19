@@ -42,14 +42,12 @@ static char	**run_cmd(char **comands, char **env, char *name)
 	while (comands[j])
 	{
 		args = ft_strtok(comands[j], SPACES);
-		env = execute(args, env);
+		env = execute(args, env, name);
 		free(comands[j]);
 		j += 1;
 		while (args[i])
 			free(args[i++]);
 		(args) ? free(args) : 0;
-		if (!env)
-			return (NULL);
 	}
 	return (env);
 }
@@ -58,19 +56,19 @@ static char	**run_cmd(char **comands, char **env, char *name)
 ** Set the path working directory.
 */
 
-static void	set_dir(char **env)
+static void	set_dir(char **env, char *name)
 {
 	char	*dir;
 	char	**arg;
 
 	dir = "PWD";
-	arg = (char**)ft_memalloc(sizeof(char *) * 4);
+	arg = (char **)ft_memalloc(sizeof(char *) * 4);
 	arg[0] = NULL;
 	arg[1] = ft_strdup(dir);
 	arg[2] = ft_strnew(PATH_MAX);
 	arg[3] = 0;
 	getcwd(arg[2], PATH_MAX);
-	cmd_setenv(arg, env);
+	cmd_setenv(arg, env, name);
 	free(arg[1]);
 	free(arg[2]);
 	free(arg);
@@ -91,7 +89,7 @@ int			minishell(char **env, char *name)
 	while (status)
 	{
 		ft_putstr("> ");
-		set_dir(env);
+		set_dir(env, name);
 		line = read_line();
 		comands = ft_strtok(line, ";");
 		env = run_cmd(comands, env, name);

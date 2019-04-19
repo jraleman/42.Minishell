@@ -16,7 +16,7 @@
 ** ...
 */
 
-char	**cmd_unsetenv(char **args, char **env)
+char	**cmd_unsetenv(char **args, char **env, char *name)
 {
 	int i;
 	int len;
@@ -32,10 +32,11 @@ char	**cmd_unsetenv(char **args, char **env)
 				break ;
 		}
 		free(env[i]);
-		i--;
+		i -= 1;
 		while (env[++i])
 			env[i] = env[i + 1];
 		env[i] = NULL;
 	}
 	return (env);
+	(void)name;
 }

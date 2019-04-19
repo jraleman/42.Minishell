@@ -13,7 +13,7 @@
 #include "minishell.h"
 
 /*
-** Execute process.
+** Execute a process.
 */
 
 static int	execute_ps(char *ex, char **args, char **env, char *name)
@@ -35,7 +35,7 @@ static int	execute_ps(char *ex, char **args, char **env, char *name)
 ** Check for command error.
 */
 
-static void	check_error(char *p, char *arg)
+static void	check_error(char *p, char *arg, char *name)
 {
 	int i;
 	int slash;
@@ -46,9 +46,15 @@ static void	check_error(char *p, char *arg)
 		if (arg[i] == '/')
 			slash += 1;
 	if (slash > 0 && !p)
-		write(1, "no such file or directory\n", ft_strlen( "no such file or directory\n"));
+	{
+		ft_putstr(name);
+		ft_putendl(": No such file or directory");
+	}
 	else if (!p)
-		write(1, "command not found\n", ft_strlen( "command not found\n"));
+	{
+		ft_putstr(name);
+		ft_putendl(": Command not found");
+	}
 	return ;
 }
 
@@ -56,7 +62,7 @@ static void	check_error(char *p, char *arg)
 ** Find a command.
 */
 
-static void	find_cmd(char **args, char **env)
+static void	find_cmd(char **args, char **env, char *name)
 {
 	char	**p;
 	char	*path;
@@ -73,11 +79,11 @@ static void	find_cmd(char **args, char **env)
 		ft_strcat(path, args[0]);
 		if (access(path, F_OK) != -1)
 		{
-			execute_ps(path, args, env, "minishell");
+			execute_ps(path, args, env, name);
 			break ;
 		}
 	}
-	check_error(p[i], args[0]);
+	check_error(p[i], args[0], name);
 	i = -1;
 	while (p[++i])
 		free(p[i]);
@@ -89,7 +95,7 @@ static void	find_cmd(char **args, char **env)
 ** Execute a command.
 */
 
-char		**execute(char **args, char **env)
+char		**execute(char **args, char **env, char *name)
 {
 	int		i;
 
@@ -98,10 +104,10 @@ char		**execute(char **args, char **env)
 		return (env);
 	while (++i < BLT_NUM)
 		if (!ft_strcmp(args[0], blt_str(i)))
-			return ((*blt_func(i))(args, env));
+			return ((*blt_func(i))(args, env, name));
 	if (access(args[0], F_OK) != -1)
-		execute_ps(args[0], args, env, "minishell");
+		execute_ps(args[0], args, env, name);
 	else
-		find_cmd(args, env);
+		find_cmd(args, env, name);
 	return (env);
 }

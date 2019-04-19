@@ -24,11 +24,11 @@ static void	init_env(char ***env, char **envp)
 	i = -1;
 	while (envp[++i])
 		NULL;
-	(*env) = (char**)ft_memalloc(sizeof(char*) * i);
+	(*env) = (char **)ft_memalloc(sizeof(char*) * i);
 	i = -1;
 	while (envp[++i])
 	{
-		(*env)[i] = (char*)ft_memalloc(PATH_MAX + 1);
+		(*env)[i] = (char *)ft_memalloc(PATH_MAX + 1);
 		j = -1;
 		while (envp[i][++j])
 			(*env)[i][j] = envp[i][j];
