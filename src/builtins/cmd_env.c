@@ -13,7 +13,7 @@
 #include "minishell.h"
 
 /*
-** ...
+** Builtin env command implementation.
 */
 
 char		**cmd_env(char **args, char **env, char *name)

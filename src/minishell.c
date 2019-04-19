@@ -35,8 +35,6 @@ static char	**run_cmd(char **comands, char **env, char *name)
 	int		i;
 	int		j;
 
-	(void)name;
-
 	i = 0;
 	j = 0;
 	while (comands[j])
@@ -50,6 +48,7 @@ static char	**run_cmd(char **comands, char **env, char *name)
 		(args) ? free(args) : 0;
 	}
 	return (env);
+	(void)name;
 }
 
 /*
@@ -81,7 +80,7 @@ static void	set_dir(char **env, char *name)
 
 int			minishell(char **env, char *name)
 {
-	int 	status;
+	int		status;
 	char	*line;
 	char	**comands;
 

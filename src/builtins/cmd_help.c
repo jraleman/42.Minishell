@@ -13,12 +13,12 @@
 #include "minishell.h"
 
 /*
-** ...
+** Builtin help message command implementation.
 */
 
-char	**cmd_help(char **args, char **env, char *name)
+char		**cmd_help(char **args, char **env, char *name)
 {
-	write(1, "HELP\n", 5);
+	ft_putendl("Help");
 	return (env);
 	(void)args;
 	(void)name;

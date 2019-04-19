@@ -12,81 +12,79 @@
 
 #include "minishell.h"
 
-// https://github.com/markotikvic/cowsay/blob/master/main.c
 /*
-char cow[] ="\n\
-     \\  ^__^              \n\
-      \\ (oo)\\______      \n\
-        (__)\\      )\\/\\ \n\
-            ||---w |       \n\
-            ||    ||       \n";
+** Prints a squirtle.
 */
 
-char	*squirtle(void)
+static void	draw_squirtle(void)
 {
-	return ("\
-       _.-~~~~~~~-.              \n\
-      /         _   ~.            \n\
-     |#`       /#`    \\           \n\
-     |-'|      |-'|    |          \n\
-     /--        --     |-.        \n\
-     \\__   .  .        / /\\_      \n\
-      \\ ~~--___---~~/\\| |   ~-.   \n\
-   .---`~~--____---_)  \\ \\-__  \\  \n\
-  ) <    |__    __\\_   \\ \\     | \n\
-   ~-.__ /   ~~~~   \\   \\ \\     | \n\
-        ~-.   |     .~-.-' |    | \n\
-         | \\___|___/     / /     |\n\
-         | /   |   \\     | |  /  |\n\
-          \\     |   ~-___ \\ \\/  / \n\
-          /\\__ / `._ /   ~-\\ \\_/  \n\
-         /    \\_____|      |`~    \n\
-        |      |    |      |      \n\
-         \\     |    |      |      \n\
-         >______)   /_/\\/\\_\\      \n\n");
+	ft_putendl("       _.-~~~~~~~-.                  ");
+	ft_putendl("      /         _   ~.               ");
+	ft_putendl("     |#`       /#`    \\             ");
+	ft_putendl("     |-'|      |-'|    |             ");
+	ft_putendl("     |-'|      |-'|    |             ");
+	ft_putendl("     /--        --     |-.           ");
+	ft_putendl("     \\__   .  .        / /\\_       ");
+	ft_putendl("      \\ ~~--___---~~/\\| |   ~-.    ");
+	ft_putendl("   .---`~~--____---_)  \\ \\-__  \\  ");
+	ft_putendl("  ) <    |__    __\\_   \\ \\     |  ");
+	ft_putendl("   ~-.__ /   ~~~~   \\   \\ \\     | ");
+	ft_putendl("        ~-.   |     .~-.-' |    |    ");
+	ft_putendl("         | \\___|___/     / /     |  ");
+	ft_putendl("         | /   |   \\     | |  /  |  ");
+	ft_putendl("          \\     |   ~-___ \\ \\/  / ");
+	ft_putendl("          /\\__ / `._ /   ~-\\ \\_/  ");
+	ft_putendl("         /    \\_____|      |`~      ");
+	ft_putendl("        |      |    |      |         ");
+	ft_putendl("         \\     |    |      |        ");
+	ft_putendl("         >______)   /_/\\/\\_\\    \n");
+	return ;
 }
 
 /*
-** ...
+** Prints the usage message.
 */
 
-void print_usage()
+static void	print_usage(void)
 {
-    printf("Usage: cowsay \"<your text goes here>\"\n");
+	ft_putendl("Usage: squirtle \"your-message-here\"");
+	return ;
 }
 
 /*
-** ...
+** Draw a dashed line.
 */
 
-void dashed_line(int l)
+static void	dashed_line(int len)
 {
-    printf(" ");
-    for (int i = 0; i < l+2; i++)
-        printf("_");
-    printf(" \n");
+	int		i;
+
+	i = -1;
+	ft_putchar(' ');
+	while (++i < len + 2)
+		ft_putchar('_');
+	ft_putstr(" \n");
+	return ;
 }
 
 /*
-** ...
+** Builtin cowsay like command implementation.
 */
 
 char		**cmd_squirtle(char **args, char **env, char *name)
 {
-	int		lsize;
-	char	*poke;
+	int		line_size;
 
-	if (!args[0] || args[2])
+	if (!args[1] || args[2])
 		print_usage();
 	else
 	{
-		lsize = ft_strlen(args[1]);
-		poke = squirtle();
-		dashed_line(lsize);
-		printf("\n");
-		printf("< %s >\n", args[1]);
-		dashed_line(lsize);
-		printf("%s\n", poke);
+		line_size = ft_strlen(args[1]);
+		dashed_line(line_size);
+		ft_putchar('\n');
+		ft_putendl(args[1]);
+		dashed_line(line_size);
+		draw_squirtle();
 	}
 	return (env);
 	(void)name;

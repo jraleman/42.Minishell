@@ -13,7 +13,7 @@
 #include "minishell.h"
 
 /*
-** ...
+** Builtin pwd command implementation.
 */
 
 char	**cmd_pwd(char **args, char **env, char *name)
@@ -23,11 +23,14 @@ char	**cmd_pwd(char **args, char **env, char *name)
 
 	i = 0;
 	while (args[i])
-		i++;
-	// (i > 1) ? ft_printf("pwd: too many arguments\n") : 0;
-	(i > 1) ? write(1, "pwd: too many arguments\n", ft_strlen("pwd: too many arguments\n")) : 0;
-	(i == 1) ? write(1, getcwd(buf, PATH_MAX), ft_strlen(getcwd(buf, PATH_MAX))) : 0;
-	write(1, "\n", 1);
+		i += 1;
+	if (i > 1)
+	{
+		ft_putstr(args[0]);
+		ft_putendl(": too many arguments");
+	}
+	else if (i == 1)
+		ft_putendl(getcwd(buf, PATH_MAX));
 	return (env);
 	(void)name;
 }

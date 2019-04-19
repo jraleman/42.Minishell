@@ -66,11 +66,11 @@ static char	**create_new(char **args, char **env)
 ** ...
 */
 
-static void	free_ar(char **a)
+static void	free_arg(char **arg)
 {
-	free(a[1]);
-	free(a[2]);
-	free(a);
+	free(arg[1]);
+	free(arg[2]);
+	free(arg);
 }
 
 /*
@@ -81,31 +81,31 @@ static char	**one_arg(char **args, char **env, char *name)
 {
 	int		i;
 	int		j;
-	char	**a;
+	char	**arg;
 
 	i = (args[1][0] == '"');
 	j = 0;
-	a = (char**)ft_memalloc(sizeof(char*) * 3);
-	a[0] = NULL;
-	a[1] = ft_strnew(sizeof(args[1]));
-	a[2] = ft_strnew(sizeof(args[1]));
+	arg = (char **)ft_memalloc(sizeof(char *) * 3);
+	arg[0] = NULL;
+	arg[1] = ft_strnew(sizeof(args[1]));
+	arg[2] = ft_strnew(sizeof(args[1]));
 	while (args[1][i] != '=' && args[1][i])
-		a[1][j++] = args[1][i++];
+		arg[1][j++] = args[1][i++];
 	if (!args[1][i])
 	{
-		free(a);
+		free(arg);
 		return (env);
 	}
 	j = 0;
 	while (args[1][++i] != '"' && args[1][i])
-		a[2][j++] = args[1][i];
-	env = cmd_setenv(a, env, name);
-	free_ar(a);
+		arg[2][j++] = args[1][i];
+	env = cmd_setenv(arg, env, name);
+	free_arg(arg);
 	return (env);
 }
 
 /*
-** ...
+** Builtin setenv command implementation.
 */
 
 char		**cmd_setenv(char **args, char **env, char *name)

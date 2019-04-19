@@ -13,7 +13,7 @@
 #include "minishell.h"
 
 /*
-** ...
+** Builtin exit command implementation.
 */
 
 char		**cmd_exit(char **args, char **env, char *name)

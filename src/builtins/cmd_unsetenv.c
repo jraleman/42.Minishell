@@ -13,7 +13,7 @@
 #include "minishell.h"
 
 /*
-** ...
+** Builtin unsetenv command implementation.
 */
 
 char	**cmd_unsetenv(char **args, char **env, char *name)
@@ -27,10 +27,8 @@ char	**cmd_unsetenv(char **args, char **env, char *name)
 	if (args[1] && ft_find_env(args[1], env)[0] != 0)
 	{
 		while (env[++i])
-		{
 			if (!ft_strncmp(env[i], args[1], len) && env[i][len] == '=')
 				break ;
-		}
 		free(env[i]);
 		i -= 1;
 		while (env[++i])
