@@ -28,7 +28,7 @@ char		*blt_str(int i)
 	blt_str[5] = "unsetenv";
 	blt_str[6] = "help";
 	blt_str[7] = "pwd";
-	blt_str[8] = "yoshi";
+	blt_str[8] = "squirtle";
 	blt_str[9] = NULL;
 	return (blt_str[i]);
 }
@@ -49,6 +49,6 @@ char		**(*blt_func(int i))(char **args, char **env, char *name)
 	blt_func[5] = &cmd_unsetenv;
 	blt_func[6] = &cmd_help;
 	blt_func[7] = &cmd_pwd;
-	blt_func[8] = &cmd_yoshi;
+	blt_func[8] = &cmd_squirtle;
 	return (blt_func[i]);
 }

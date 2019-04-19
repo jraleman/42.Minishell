@@ -71,7 +71,7 @@ void dashed_line(int l)
 ** ...
 */
 
-char		**cmd_yoshi(char **args, char **env, char *name)
+char		**cmd_squirtle(char **args, char **env, char *name)
 {
 	int		lsize;
 	char	*poke;

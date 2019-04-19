@@ -21,7 +21,7 @@ SRC			= src/main.c \
 			  src/builtins/cmd_pwd.c \
 			  src/builtins/cmd_setenv.c \
 			  src/builtins/cmd_unsetenv.c \
-			  src/builtins/cmd_yoshi.c \
+			  src/builtins/cmd_squirtle.c \
 			  src/execute.c \
 			  src/minishell.c \
 			  src/utils/ft_bzero.c \

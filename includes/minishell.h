@@ -58,6 +58,6 @@ char	**cmd_env(char **args, char **env, char *name);
 char	**cmd_exit(char **args, char **env, char *name);
 char	**cmd_pwd(char **args, char **env, char *name);
 char	**cmd_help(char **args, char **env, char *name);
-char	**cmd_yoshi(char **args, char **env, char *name);
+char	**cmd_squirtle(char **args, char **env, char *name);
 
 #endif
