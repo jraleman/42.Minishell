@@ -12,46 +12,83 @@
 
 #include "utils.h"
 
-static int	ft_read(const int fd, char **s)
+static char	*re_alloc(char *str, size_t size)
 {
-	char	buf[BUFF_SIZE + 1];
-	char	*tmp;
-	int		i;
+	char	*p;
+	size_t	i;
 
-	if ((i = read(fd, buf, BUFF_SIZE)) > 0)
+	p = NULL;
+	i = 0;
+	if (str)
 	{
-		buf[i] = '\0';
-		tmp = *s;
-		*s = ft_strjoin(tmp, buf);
-		free(tmp);
+		p = (char *)malloc(sizeof(char) * (size));
+		if (!p)
+			return (NULL);
+		ft_bzero(p, size);
+		ft_strcpy(p, str);
+		free(str);
+		str = NULL;
 	}
-	return (i);
+	return (p);
+}
+
+static int	ft_not_bull(char *str)
+{
+	if (str[0] != '\0')
+		return (1);
+	return (0);
+}
+
+static char	*ft_strrsub(char *s, size_t len)
+{
+	char			*p;
+	size_t			i;
+	size_t			start;
+
+	i = 0;
+	if (!s)
+		return (NULL);
+	p = (char *)malloc(sizeof(char) * len + 1);
+	if (!p)
+		return (NULL);
+	start = ft_strlen(s) - len;
+	while (i < len)
+	{
+		p[i] = s[i + start];
+		i++;
+	}
+	p[i] = '\0';
+	ft_strclr(s);
+	free(s);
+	s = NULL;
+	return (p);
 }
 
 int			get_next_line(const int fd, char **line)
 {
-	static char	*s[4864];
-	char		*end_s;
-	int			k;
+	char		buf[BUFF_SIZE + 1];
+	char		*tmp;
+	static char *save;
+	int			ret;
 
-	if (fd < 0 || fd > 2048 - 1 || line == NULL)
+	if (fd < 0 || line == NULL || read(fd, buf, 0) < 0)
 		return (-1);
-	if (!s[fd])
-		s[fd] = ft_strnew(1);
-	while ((end_s = ft_strchr(s[fd], '\n')) == NULL)
+	if (!save)
+		save = ft_strnew(BUFF_SIZE + 1);
+	ft_bzero(buf, BUFF_SIZE + 1);
+	while (!ft_strchr(buf, '\n') && (ret = read(fd, buf, BUFF_SIZE)))
 	{
-		if ((k = ft_read(fd, &s[fd])) < 0)
-			return (-1);
-		if (k == 0 && !end_s)
-		{
-			if (s[fd][0] == '\0')
-				return (0);
-			*line = s[fd];
-			s[fd] = NULL;
-			return (1);
-		}
+		save = re_alloc(save, ft_strlen(save) + ret + 1);
+		save = ft_strncat(save, buf, ret);
 	}
-	*line = ft_strsub(s[fd], 0, end_s - s[fd]);
-	s[fd] = ft_strdup(end_s + 1);
-	return (1);
+	if ((tmp = ft_strchr(save, '\n')))
+	{
+		*line = ft_strsub(save, 0, ft_strlen(save) - ft_strlen(tmp));
+		save = ft_strrsub(save, ft_strlen(&tmp[1]));
+		return (1);
+	}
+	*line = ft_strdup(save);
+	ret = ft_not_bull(save);
+	ft_strclr(save);
+	return (ret == 0 ? 0 : 1);
 }
