@@ -13,6 +13,20 @@
 #include "minishell.h"
 
 /*
+** Returns the count of arguments passed as parameter.
+*/
+
+static int	count_args(char **args)
+{
+	int		count;
+
+	count = 0;
+	while (args[count])
+		count += 1;
+	return (count);
+}
+
+/*
 ** Prints a squirtle.
 */
 
@@ -75,7 +89,7 @@ char		**cmd_squirtle(char **args, char **env, char *name)
 {
 	int		line_size;
 
-	if (!args[1] || args[2])
+	if (count_args(args) != 2)
 		print_usage();
 	else
 	{
