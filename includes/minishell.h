@@ -34,8 +34,11 @@
 ** Macros.
 */
 
-# define BLT_NUM	(9)
-# define TOK_DELIM	" \t\n\r\a\""
+# define BLT_NUM		(9)
+# define TOK_DELIM		" \t\n\r\a\""
+# define CD_NOTEXIST	("No such file or directory.")
+# define CD_NOTDIR		("Error opening directory.")
+# define CD_NOPERM		("Permission denied.")
 
 /*
 ** Main functions
